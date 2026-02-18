@@ -1,7 +1,0 @@
-
-\section{Re-Flow Iteration results}
-\label{sec:reflow_iteration_results}
-
-This section details the results of applying the iterative re-flow procedure~\citep{Liu:2023RF, Yoo:2025ReDi} on the QM9 dataset~\citep{ramakrishnan2014quantum}. We generated 1,024 samples across various timesteps and re-flow iterations, assessing validity, uniqueness, and novelty. The configuration for subsequent re-flow iterations follows the same protocol as our main experiment. As shown in~\Tabref{tab:qm9_rect_validity},~\Tabref{tab:qm9_rect_uniqueness}, and~\Tabref{tab:qm9_rect_novelty}, all metrics are averaged over 10 independent runs with standard deviations provided. We observed that iterative re-flow consistently enhances few-step generation capabilities. Notably, \methodname{} demonstrates superior performance over the baseline; it outperforms UDLM not only at equivalent iteration levels but also surpasses UDLM with multiple re-flow iterations even when \methodname{} uses one or no additional iterations.
-
-\input{tables/101_additional_reflow_qm9}
