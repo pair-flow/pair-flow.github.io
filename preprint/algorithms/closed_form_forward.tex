@@ -1,0 +1,44 @@
+% V2
+{\scriptsize
+\begin{figure}[t]
+    \centering
+    \begin{minipage}[t]{0.46\textwidth}
+        \vspace{0pt}%
+        \includegraphics[width=\linewidth]{figures/pairflow.png}
+        \vspace{-20pt}
+        % \caption{Comparison of training pair evolution between~\ourname{} and UDLM.~\ourname{} maintains lower average Hamming distance (6.47 vs. 9.0), promoting more straight path during training.}
+        \caption{Illustrations of data inversion in~\ourname{} and the standard corruption process in UDLM.~\ourname{} achieves a lower average Hamming distance (6.47 vs.\ 9.0), promoting straighter paths during training.}
+        \label{fig:pairflow_method}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.46\textwidth}
+        \vspace{0pt}%
+        \begin{algorithm}[H]
+        \caption{\ourname{}}
+        \label{alg:coupling_backward}
+        \textbf{Input:} Dataset $\{d_m\}_{m=1}^M$, Steps $T$ \\
+        \textbf{Output:} Pairs $\pi=\{(x_{0,m}, x_{1,m})\}_{m=1}^M$ % with $x_{1,m} \sim \tilde{q}(x_1)$
+        
+        \medskip
+        
+        Initialize $\pi \gets \emptyset$
+        
+        \For{$m \gets 1$ \textbf{to} $M$}{
+            $x_{1,m} \gets d_m$ \\
+            $x \gets x_{1,m}$
+        
+            \For{$t \gets 1$ \textbf{to} $T$}{
+                Compute $p_{0 \vert t}(\cdot \vert x)$ and $\check{v}_t(\cdot, x)$ from~\Eqref{eqn:closed_backward_velocity} \\
+                Sample $z \sim \text{Cat}\!\left(z;\, \delta_{x}(\cdot) - h \cdot \check{v}_t(\cdot, x)\right)$ \\
+                $x \gets z$
+            }
+        
+            $x_{0,m} \gets x$ \\
+            $\pi \gets \pi \cup \{(x_{0,m}, x_{1,m})\}$
+        }
+        \Return $\pi$
+        % Algorithm body
+        \end{algorithm}
+    \end{minipage}
+\end{figure}
+}

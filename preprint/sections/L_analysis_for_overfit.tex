@@ -1,0 +1,14 @@
+
+\section{Analysis for the Overfitting in Image Domains}
+\label{sec:overfit_analysis}
+
+In this section, we evaluate our method using FID computed on the test sets of two image domains: CIFAR-10~\citep{krizhevsky2009learning} and MNIST-Binary~\citep{lecun2002gradient}. For CIFAR-10, we additionally report FID scores measured with DINOv2~\citep{oquab2024dinov2}. The overall results are summarized in~\Tabref{tab:cifar_fid_test} and~\Tabref{tab:mnist_binary_fid_test}. Across all evaluation metrics, the performance trend is consistent with our main findings—\methodname{} delivers improved generation quality over the baseline, with especially strong gains in the few-step generation regime.
+
+
+\input{tables/106_test_fid}
+
+
+We further assess potential memorization by measuring nearest-neighbor distances with respect to the training set. For MNIST-Binary~\citep{lecun2002gradient}, we compute pixel-wise $\ell_2$ distances, whereas for CIFAR-10~\citep{krizhevsky2009learning}, we evaluate both $\ell_2$ distance and cosine similarity between features extracted using DINOv2~\citep{oquab2024dinov2}. As summarized in~\Tabref{tab:cifar_nn_distance} and~\Tabref{tab:mnist_binary_nn_distance}, across all evaluation settings, the nearest-neighbor distances of \methodname{} are comparable to or slightly larger than those of the baseline. These results support the conclusion that our method does not suffer from severe overfitting or excessive memorization of the training data.
+
+
+\input{tables/107_nearest_neighbor_distance}

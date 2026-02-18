@@ -1,0 +1,590 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Layout */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 60px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+
+/* Header */
+header {
+    background: #fff;
+    padding: 80px 0 40px;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.authors {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.affiliation {
+    font-style: italic;
+    color: #777;
+}
+
+.links .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.links .btn:hover {
+    background: #555;
+    color: #fff;
+}
+
+/* Method Section Layout */
+.method-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.method-figure {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.method-figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Compact Algorithm Box */
+.method-algorithm {
+    flex: 1;
+    min-width: 300px;
+}
+
+.algorithm-box {
+    background: #fff;
+    padding: 15px;
+    /* Reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    /* Reduced font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.algorithm-box h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    /* Reduced header size */
+}
+
+.algorithm-box ol {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+/* TL;DR Section */
+#tldr {
+    padding: 20px 0 0 0;
+}
+
+.tldr-box {
+    background-color: #f8f9fa;
+    border-left: 5px solid #2a7ae2;
+    /* Match the PairFlow blue */
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.tldr-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #2a7ae2;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tldr-box p {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.tldr-box p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-red {
+    color: #e63946;
+    font-weight: 600;
+}
+
+.algorithm-box li {
+    margin-bottom: 3px;
+    /* Tighter spacing */
+}
+
+.math-block {
+    overflow-x: visible;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Results Grid System */
+.results-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.triple-grid .result-item {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.result-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Force 3-up layout for quantitative results (never wrap) --- */
+.results-grid.triple-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    flex-wrap: nowrap;
+    /* in case older flex rules still apply */
+}
+
+.results-grid.triple-grid .result-item {
+    min-width: 0;
+    /* critical: prevents overflow forcing wrap */
+}
+
+/* optional: keep images nicely contained */
+.results-grid.triple-grid .result-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.caption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Split View Layout for Visual Results (Legacy/Fallback) */
+.split-view-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.left-panel {
+    flex: 1;
+    min-width: 320px;
+}
+
+.right-panel {
+    flex: 1;
+    min-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sub-panel {
+    flex: 1;
+}
+
+.panel-title {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Matrix Grid for Results (Legacy) */
+.matrix-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.matrix-label {
+    width: 80px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: right;
+    padding-right: 10px;
+    flex-shrink: 0;
+}
+
+.matrix-images {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.matrix-images img {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    display: block;
+}
+
+/* Citation */
+pre {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    color: #777;
+    border-top: 1px solid #e9ecef;
+    margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .method-layout,
+    .split-view-container,
+    .results-grid {
+        flex-direction: column;
+    }
+
+    .matrix-label {
+        width: 60px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Paper-Style Algorithm Box */
+.paper-algorithm .algorithm-box {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.paper-algorithm .algorithm-header {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.paper-algorithm .algo-title {
+    font-weight: 700;
+    color: #333;
+}
+
+.paper-algorithm .algo-name {
+    font-weight: 600;
+    color: #555;
+}
+
+.paper-algorithm .algo-io {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    row-gap: 4px;
+    column-gap: 10px;
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-size: 0.9rem;
+}
+
+.paper-algorithm .algo-io dt {
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+}
+
+.paper-algorithm .algo-io dd {
+    margin: 0;
+    color: #444;
+}
+
+.paper-algorithm .algo-body {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #222;
+}
+
+.paper-algorithm .algo-lines {
+    list-style: none;
+    counter-reset: line;
+    margin: 0;
+    padding: 0;
+}
+
+.paper-algorithm .algo-lines li {
+    counter-increment: line;
+    display: grid;
+    grid-template-columns: 2.5em 1fr;
+    gap: 10px;
+    padding: 2px 0;
+}
+
+.paper-algorithm .algo-lines li::before {
+    content: counter(line);
+    color: #999;
+    text-align: right;
+    font-size: 0.8em;
+    padding-top: 2px;
+}
+
+.paper-algorithm .indent-0 {
+    padding-left: 0;
+}
+
+.paper-algorithm .indent-1 {
+    padding-left: 1.2em;
+}
+
+.paper-algorithm .indent-2 {
+    padding-left: 2.4em;
+}
+
+.paper-algorithm .kw {
+    font-weight: 700;
+    color: #000;
+}
+
+/* --- Round 3 Visual Results Refinement --- */
+
+.visual-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+/* MNIST Top Section */
+.mnist-section-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #eee;
+    padding-bottom: 10px;
+}
+
+.mnist-grid {
+    display: grid;
+    /* 7 Columns for Methods */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+
+.mnist-col-header {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.mnist-img-cell img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+    border: 1px solid #eee;
+}
+
+/* CIFAR Bottom Section */
+.cifar-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.cifar-block {
+    flex: 1;
+}
+
+.cifar-block-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* Reusing matrix classes for CIFAR internal grids, but adjusting labels */
+/* --- CIFAR layout (FIX: keep images in a row + prevent badge from being covered) --- */
+
+.cifar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.cifar-label-cell {
+    width: 110px;
+    /* was 70px */
+    padding-right: 12px;
+    /* was 10px */
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    /* keep above images */
+}
+
+.cifar-images-cell {
+    display: flex;
+    /* IMPORTANT: keep row layout */
+    flex: 1;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: nowrap;
+    /* make sure it doesn't wrap */
+    position: relative;
+    z-index: 1;
+}
+
+.cifar-images-cell img {
+    flex: 1 1 0;
+    /* distribute evenly */
+    width: 0;
+    /* IMPORTANT: prevents 100% width stacking */
+    height: auto;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    display: block;
+}
+
+
+/* --- PairFlow badge: rounded pill (force) --- */
+.pairflow-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.18em 0.65em;
+    border-radius: 9999px !important;
+    /* force pill */
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    /* prevents weird tall box */
+    white-space: nowrap;
+}
+
+.pairflow-badge.blue {
+    color: #1d4ed8;
+    border: 1px solid rgba(29, 78, 216, 0.55);
+    background: rgba(37, 99, 235, 0.10);
+}
+
+/* Responsive updates for Round 3 */
+@media (max-width: 900px) {
+    .mnist-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* Fallback */
+    }
+
+    .cifar-wrapper {
+        flex-direction: column;
+    }
+}

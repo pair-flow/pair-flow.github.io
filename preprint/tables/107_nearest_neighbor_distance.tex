@@ -1,0 +1,84 @@
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Comparison of $\ell_2$ and Dino~\citep{oquab2024dinov2} Cosine nearest neighbor distance on the CIFAR-10~\citep{krizhevsky2009learning} training set across extended NFE steps (1 to 1024). Best values are bolded.}
+\label{tab:cifar_nn_distance}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l|ccccccccccc}
+\toprule
+NFE & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 \\
+\midrule
+Metric & \multicolumn{11}{c}{$\ell_2$ ($\uparrow$)} \\
+\midrule
+UDLM & 7.97 & \textbf{9.13} & \textbf{10.06} & \textbf{10.06} & \textbf{9.40} & \textbf{8.94} & \textbf{8.63} & 8.41 & 8.29 & 8.29 & 8.22 \\
+\methodname{} & \textbf{8.03} & 8.76 & 9.42 & 9.56 & 9.18 & 8.75 & \textbf{8.63} & \textbf{8.55} & \textbf{8.51} & \textbf{8.52} & \textbf{8.52} \\
+\midrule
+Metric & \multicolumn{11}{c}{Cosine(DINOv2) ($\downarrow$)} \\
+\midrule
+UDLM & \textbf{0.242} & \textbf{0.227} & \textbf{0.231} & 0.241 & 0.237 & 0.238 & 0.235 & 0.237 & 0.237 & \textbf{0.235} & 0.237 \\
+\methodname{} & 0.245 & 0.228 & 0.235 & \textbf{0.239} & \textbf{0.236} & \textbf{0.232} & \textbf{0.232} & \textbf{0.230} & \textbf{0.232} & \textbf{0.235} & \textbf{0.233} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+% \begin{table}[H]
+% \small
+% \centering
+% % color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% % color to blue
+% \caption{Comparison of $\ell_2$ nearest neighbor distance on the MNIST-Binary~\citep{lecun2002gradient} training set across extended NFE steps (1 to 64). Best values are bolded.}
+% \label{tab:mnist_binary_nn_distance}
+% \resizebox{\textwidth}{!}{
+% \begin{tabularx}{\textwidth}{l|YYYYYYY}
+% \toprule
+% Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 8.18 & 7.06 & 6.55 & 6.42 & 6.27 & 6.29 & 6.25 \\
+% \methodname{} & 7.36 & 6.95 & 6.63 & 6.42 & 6.26 & 6.34 & 6.30 \\
+% \midrule
+% UDLM+DCD & 7.24 & 6.78 & 6.57 & 6.50 & 6.31 & 6.40 & 6.39 \\
+% \methodname{}+DCD & 7.64 & 7.34 & 7.11 & 6.91 & 6.74 & 6.76 & 6.79 \\
+% \midrule
+% UDLM+ReDi & 7.14 & 6.81 & 6.49 & 6.24 & 6.10 & 6.14 & 6.08 \\
+% \methodname{}+ReDi & 6.84 & 6.57 & 6.35 & 6.09 & 5.95 & 5.97 & 5.96 \\
+% \bottomrule
+% \end{tabularx}
+% }
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Comparison of $\ell_2$ nearest neighbor distance on the MNIST-Binary~\citep{lecun2002gradient} training set across extended NFE steps (1 to 64). Best values are bolded.}
+\label{tab:mnist_binary_nn_distance}
+\resizebox{\textwidth}{!}{
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & \textbf{8.18} & \textbf{7.06} & 6.55 & \textbf{6.42} & \textbf{6.27} & 6.29 & 6.25 \\
+\methodname{} & 7.36 & 6.95 & \textbf{6.63} & \textbf{6.42} & 6.26 & \textbf{6.34} & \textbf{6.30} \\
+\midrule
+UDLM+DCD & 7.24 & 6.78 & 6.57 & 6.50 & 6.31 & 6.40 & 6.39 \\
+\methodname{}+DCD & \textbf{7.64} & \textbf{7.34} & \textbf{7.11} & \textbf{6.91} & \textbf{6.74} & \textbf{6.76} & \textbf{6.79} \\
+\midrule
+UDLM+ReDi & \textbf{7.14} & \textbf{6.81} & \textbf{6.49} & \textbf{6.24} & \textbf{6.10} & \textbf{6.14} & \textbf{6.08} \\
+\methodname{}+ReDi & 6.84 & 6.57 & 6.35 & 6.09 & 5.95 & 5.97 & 5.96 \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}

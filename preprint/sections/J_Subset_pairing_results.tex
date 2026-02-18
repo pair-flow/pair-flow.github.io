@@ -1,0 +1,11 @@
+
+\section{subset pairing results}
+
+\label{sec:subset_pairing_results}
+
+In this section, we present comprehensive experimental results from applying our subset-partition pairing technique to the ZINC-250k molecular dataset~\citep{irwin2012zinc}. Following the same protocol as our main experiments, we generated 1,024 samples across varying timesteps and partition counts to evaluate validity, uniqueness, and novelty. The only deviation from the standard method is the pairing strategy; here, we calculate the closed-form backward velocity exclusively within each subset to reduce the computational cost of~\Eqref{eqn:closed_form_noise_predictor}.
+%The detailed procedure is outlined in~\Algref{alg:coupling_backward_subset}. 
+All reported metrics, summarized in~\Tabref{tab:zinc250k_subset_validity},~\Tabref{tab:zinc250k_subset_uniqueness}, and~\Tabref{tab:zinc250k_subset_novelty}, are averaged over 10 independent runs with corresponding standard deviations. Additionally, we report the pairing-time cost for each subset-partition configuration. The results demonstrate that our subset-pairing algorithm effectively reduces the computational time for pairing, while maintaining performance comparable to the full-set baseline.
+
+
+\input{tables/102_subset_pairing_zinc250k}

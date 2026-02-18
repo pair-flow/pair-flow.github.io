@@ -1,0 +1,20 @@
+\begin{figure}[t!]
+    \centering
+    \begin{minipage}[t]{0.31\textwidth} % 첫 번째 그래프
+        \centering
+        \includegraphics[width=\textwidth]{figures/09_final/01_qm9_valid_distil.png}
+    \end{minipage}
+    \hfill % 그래프 사이의 수평 공간
+    \begin{minipage}[t]{0.31\textwidth} % 두 번째 그래프
+        \centering
+        \includegraphics[width=\textwidth]{figures/09_final/02_zinc_valid_distil.png}
+    \end{minipage}
+    \hfill % 그래프 사이의 수평 공간
+    \begin{minipage}[t]{0.31\textwidth} % 세 번째 그래프
+        \centering
+        \includegraphics[width=\textwidth]{figures/09_final/03_binary_mnist_fid_distil.png}
+    \end{minipage}
+    \caption{Step-wise performance analysis of distilled models on molecular and image datasets. From left to right: number of valid molecules on QM9, number of valid molecules on ZINC-250k, and FID on MNIST-Binary.}
+    \vspace{-\baselineskip} % 전체 그림 아래의 수직 공간 조절
+    \label{fig:image_distillation_plots}
+\end{figure}

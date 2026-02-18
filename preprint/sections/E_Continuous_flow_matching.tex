@@ -1,0 +1,86 @@
+\section{Experiment on Continuous Flow Matching}
+\label{sec:continuous_flow_matching}
+
+\input{tables/08_mnist_continuous}
+
+Alongside our main experiments in the discrete setting, we also demonstrate the potential of our method to extend to continuous domains, as illustrated by the toy experiment presented below. Here, we denote by~\ourname{} a continuous flow model trained on source–target pairs constructed using the continuous variant of the algorithm described in~\Secref{subsec:closed_form_backward_velocity}.
+
+\subsection{Closed-form Velocity in Continuous Flow Matching}
+\label{subsec:closed_velocity_flow}
+
+\paragraph{Setup.}
+Let $X_0\sim p_0$ (source), $X_1\sim q$ (target) be independent random variables in $\mathbb{R}^N$ and consider the linear probability path
+\begin{equation}
+\label{eq:linear_path_cont}
+X_t = (1-t)X_0 + t X_1, \qquad t\in[0,1].
+\end{equation}
+For flow matching with the linear path~\Eqref{eq:linear_path_cont}, the optimal velocity field equals the conditional drift:
+\begin{equation}
+\label{eq:fm_velocity_def}
+v_t(x) = \mathbb{E}\left[X_1 - X_0 \middle| X_t = x \right].
+\end{equation}
+We derive a closed form of~\Eqref{eq:fm_velocity_def} that is directly computable from $p_0$ and $q$.
+
+\paragraph{Derivation.}
+By Bayes’ rule with a Dirac constraint for the linear relation~\Eqref{eq:linear_path_cont},
+\begin{equation}
+\label{eq:posterior_joint}
+p(x_0,x_1 \mid X_t=x) \quad \propto  \quad p_0(x_0)\ q(x_1)\ \delta\left(x - (1-t)x_0 - t x_1\right).
+\end{equation}
+Integrating out $x_0$ using $\delta(Ay-b)=|{\det A}|^{-1}\ \delta\left(y-A^{-1}b\right)$ with $A=(1-t)I$ gives
+\begin{align}
+\label{eq:posterior_x1}
+p(x_1 \mid X_t=x)\quad \propto \quad q(x_1)\ (1-t)^{-D}\ p_0\left( \frac{x - t x_1}{1-t} \right).
+\end{align}
+Hence,
+\begin{align}
+\label{eq:vt_ratio_integrals}
+v_t(x)
+&= \frac{\displaystyle \iint (x_1-x_0)\  p(x_0,x_1 \mid X_t=x)\ \mathrm{d}x_0 \mathrm{d}x_1}{\displaystyle \iint p(x_0,x_1 \mid X_t=x)\ \mathrm{d}x_0\ \mathrm{d}x_1} \\
+&= \frac{\displaystyle \iint (x_1-x_0)\  p_0(x_0)\  q(x_1)\  \delta\left(x-(1-t)x_0-tx_1\right) \mathrm{d}x_0 \mathrm{d}x_1}{\displaystyle \iint p_0(x_0)\ q(x_1)\ \delta\left(x-(1-t)x_0-tx_1\right)\ \mathrm{d}x_0\ \mathrm{d}x_1} \\
+&= \frac{\displaystyle \int q(x_1)\ p_0\left(\tfrac{x-tx_1}{1-t}\right)\ \Big(x_1 - \tfrac{x-tx_1}{1-t}\Big)\ \mathrm{d}x_1}{\displaystyle \int q(x_1)\ p_0\left(\tfrac{x-tx_1}{1-t}\right), \mathrm{d}x_1}.
+\end{align}
+Observing $x_1 - \tfrac{x-tx_1}{1-t} = \tfrac{x_1 - x}{1-t}$, we obtain the compact form
+\begin{equation}
+\label{eq:vt_closed_form_general}
+v_t(x) = \frac{1}{1-t}\ \frac{\displaystyle \int q(x_1)\ p_0\left(\tfrac{x-tx_1}{1-t}\right)\ (x_1 - x)\ \mathrm{d}x_1}{\displaystyle \int q(x_1)\ p_0\left(\tfrac{x-tx_1}{1-t}\right)\ \mathrm{d}x_1}.
+\end{equation}
+
+When we have a dataset with samples $\{d_m\}_{m=1}^M$, the target distribution $q$ is approximated by the empirical measure $q(x_1) \approx \tfrac{1}{M}\sum_{m=1}^M \delta_{d_m}(x_1)$, then \Eqref{eq:vt_closed_form_general} reduces as follow:
+
+\begin{equation}
+\label{eq:vt_empirical_cont}
+v_t(x) = \frac{1}{1-t}\ \frac{\sum_{m=1}^M p_0\left(\tfrac{x-td_m}{1-t}\right)\ (d_m - x)}{\sum_{m=1}^M p_0\left(\tfrac{x-td_m}{1-t}\right)}.
+\end{equation}
+
+When $p_0$ is standard Gaussian, $p_0(y)=(2\pi)^{-D/2}\exp\left(-\tfrac{1}{2}\|y\|_2^2\right)$, the normalizing constants cancel in~\Eqref{eq:vt_empirical_cont}, yielding the closed form velocity:
+\begin{equation}
+\label{eq:vt_continuous}
+v_t(x) = \frac{1}{1-t}\ \frac{\sum_{m=1}^M \exp\left(-\tfrac{1}{2}\left\|\tfrac{x-td_m}{1-t}\right\|_2^2\right)\ (d_m - x)}{\sum_{m=1}^M \exp\left(-\tfrac{1}{2}\left\|\tfrac{x-td_m}{1-t}\right\|_2^2\right)}.
+\end{equation}
+
+This formulation has already been introduced in previous works~\citep{Karras:2022EDM,Bertrand:2025Closed}; however, to the best of our knowledge, no prior work has extended this idea to designing couplings for accelerating flow models using the re-flow technique~\citep{Liu:2023RF}. In the continuous domain, the backward velocity can be obtained directly by flipping the sign of the forward velocity. In contrast, in the discrete domain, the corresponding expression does not converge as $\lim_{t \to 1}$, and thus the backward velocity cannot be employed for sampling starting from data points. Therefore, in this section, we perform experiments using the forward velocity. 
+
+% -----------------------------------------------------------
+
+\subsection{Continuous flow matching on MNIST}
+\label{subsec:continuous_mnist}
+
+We train rectified flow models on MNIST~\citep{lecun2002gradient} using two pairing strategies: (i) independent pairing (baseline) and (ii) closed-form pairing as described in \Secref{subsec:closed_velocity_flow}. We adopt CondOT~\citep{Lipman:2023FlowMatching} as our base flow model, which is originally trained with a independent pairing. We denote the variant of CondOT trained on pairs generated by the closed-form forward velocity as \methodname{}. To enable a few-step sampling, we subsequently apply rectification distillation (ReFlow~\citep{Liu:2023RF}) to each pretrained model, denoted by the suffix ``+RF''.
+
+We use an NCSN++-style U-Net backbone~\citep{song2021scorebased} with a base width of 64 and 3 downsampling stages (doubling channels at each stage), optimized using Adam~\citep{Kingma:2014Adam} with a learning rate of $2\times 10^{-4}$. The pretraining takes 500 epochs. The distillation stage requires 200 epochs with a learning rate of $2\times 10^{-5}$.
+
+\Tabref{tab:continuous_mnist} summarizes performance at various sampling steps. Without distillation, closed-form pairing (\ourname{}) yields significantly better FID in the few-step settings and maintains the performance in the many-step settings, relative to the baseline. With distillation (ReFlow~\citep{Liu:2023RF}, our method still shows better performance: \ourname{}+RF achieves a lower FID in every sampling budget than ReFlow applied to the baseline. These results show that closed-form pairing benefits both undistilled and distilled flow models, with especially large gains when the sampling steps are small.
+
+
+\subsection{Continuous rectified flows on dimension-varying synthetic data}
+\label{subsec:continuous_synthetic}
+
+To assess scalability, we construct an N-fold product of the standard two-moons distribution, yielding a dataset in $\mathbb{R}^{2N}$. We consider dimensions $d\in\{2,4,8,16,32,64,128,256\}$ (i.e., $d=2N$) and train rectified flow models with and without closed-form pairing under a common training setup. The architecture is a simple transformer-based encoder with depth $8$, where the hidden size increases with dimension as $32, 64, 128, 192, 256, 384, 512, 768$, respectively.
+
+For the synthetic experiments we report the Chamfer distance (log scale) between $50{,}000$ training datapoints and $5{,}000$ generated samples. Since the dataset is an $N$-fold product of 2D two-moons, Chamfer distance is computed using only the first two coordinates to keep the metric scale consistent across $d$ and measure fidelity to the base 2D geometry.
+
+
+\Figref{fig:synthetic_graph} shows the quantitative results. At low dimensions, closed-form pairing yields substantial improvements over the independently paired baseline. However, as the data dimension increases, we observe that the magnitude of the improvement decreases. This trend suggests a practical limitation of closed-form pairing for high-dimensional continuous data.
+
+\input{figures/latex_src/synthetic}

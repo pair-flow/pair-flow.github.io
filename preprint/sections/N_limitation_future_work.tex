@@ -1,0 +1,8 @@
+
+\section{Limitations and Future Work}
+\label{sec:limitation_future_work}
+
+We hope this work initiates broader discussion on reducing training compute while still enabling fast generation in generative models. Such efficiency can have a significant impact, from reducing energy consumption in training large-scale generative models to contributing to the democratization of foundation model development.
+
+%%%%
+A natural follow-up question to our work is whether the same idea can be applied to continuous Flow Matching (FM). We have evaluated this extension on continuous FM models, with results provided in App.~\ref{sec:continuous_flow_matching}. Our experiments with synthetic data show that the method is effective for relatively low-dimensional data, while its advantage a bit diminishes for higher-dimensional data. We will further investigate the effect of our method on continuous data, where we hypothesize that a substantially larger number of source–target pairs will be required. Nonetheless, we emphasize that even in this initial exploration of accelerating flow models through well-aligned pairing,~\ourname{} is particularly well-suited for low-dimensional discrete data, which includes many forms of scientific data such as molecular and protein structures.

@@ -1,0 +1,179 @@
+
+
+\section{Proof for Closed-form Velocity}
+\label{sec:appendix_proof}
+
+In this section, we present the detailed derivations of the closed-form forward velocity~\Eqref{eqn:closed_forward_velocity} and backward velocity~\Eqref{eqn:closed_backward_velocity} introduced in~\Secref{sec:background}. \Secref{subsec:appx_proof_forward_velocity_discrete} provides the proof of the closed-form forward velocity, while \Secref{subsec:appx_proof_backward_velocity_discrete} presents the proof of the closed-form backward velocity. Both derivations are based on the assumption of a uniform source distribution.
+
+% ----------------------------------------------------
+\subsection{Proof of Closed-form Forward Velocity in Discrete Flow Models}
+\label{subsec:appx_proof_forward_velocity_discrete}
+
+Let $x, z \in \mathcal{V}^N$ be sequences of tokens $x^i, z^i \in \mathcal{V}$ for $i \in {1, \dots, N}$, where each token takes values from the discrete vocabulary $\mathcal{V} = \{1, \dots, K\}$.
+We begin with the expression of the forward velocity given in~\Eqref{eqn:closed_forward_velocity}:
+\begin{align}
+    \hat{v}_t(x^i, z) = \frac{\dot{\kappa}_t}{1-\kappa_t}\left[p_{1|t}(x^i|z) - \delta_{z}(x^i)\right].
+\end{align}
+
+We first derive the closed-form expression for the probability denoiser $p_{1|t}(x^i  |  z)$:
+
+Using Bayes' rule,
+\begin{align}
+p_{1|t}(x^i|z)
+&= \sum_{x_0,x_1}\delta_{x_1^i}(x^i)\,p_t(x_0,x_1 |  z) \\
+&= \sum_{x_0,x_1}\delta_{x_1^i}(x^i)\,\frac{p_t(x_0,x_1,z)}{p_t(z)} \\
+&= \frac{\sum_{x_0,x_1}\delta_{x_1^i}(x^i)\,p_t(x_0,x_1,z)}{\sum_{x_0,x_1}p_t(x_0,x_1,z)}.
+\label{eq:denoiser_ratio_app}
+\end{align}
+We factor the joint as
+\begin{align}
+p_t(x_0,x_1,z)\;&\propto\; p_0(x_0)\,p_1(x_1)\,p_t(z |  x_0,x_1) \\
+p_t(z |  x_0,x_1)\;&=\;\prod_{j=1}^N\!\big[\kappa_t\,\delta_{x_1^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big]
+\label{eq:kernel_app}
+\end{align}
+
+and use the empirical target
+\begin{equation}
+p_1(x_1)\;=\;\frac{1}{M}\sum_{m=1}^M \delta_{d_m}(x_1)
+\quad\text{(\Eqref{eqn:empirical_target})}.
+\label{eq:empirical_p1_app}
+\end{equation}
+Since $p_0(x_0)$ is constant, it cancels between the numerator and denominator of
+\Eqref{eq:denoiser_ratio_app}, yielding
+\begin{align}
+p_{1 |  t}(x^i |  z)
+&= \frac{\sum_{x_0,x_1}\delta_{x_1^i}(x^i)\,p_1(x_1)\,p_t(z| x_0,x_1)}
+{\sum_{x_0,x_1}p_1(x_1)\,p_t(z |  x_0,x_1)} \nonumber\\
+&= \frac{\sum_{m=1}^M \sum_{x_0}\delta_{d_m^i}(x^i)\,\prod_{j=1}^N\!\big[\kappa_t\,\delta_{d_m^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big]}
+{\sum_{m=1}^M \sum_{x_0}\prod_{j=1}^N\!\big[\kappa_t\,\delta_{d_m^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big]}.
+\label{eq:denoiser_expanded_app}
+\end{align}
+
+According to this expression, the probability denoiser $p_{1 \vert t}(x^i \vert z)$ can be interpreted as a weighted sum over all data points $x_1$, given by the term
+\begin{align}
+    \sum_{x_0} \prod_j \left[ \kappa_t \delta_{x_1^j}(z^j) + (1-\kappa_t) \delta_{x_0^j}(z^j) \right]. 
+\end{align}
+
+Let $h(s, z)$ denote the Hamming distance between two sequences $s$ and $z$, defined as
+\begin{align}
+    h(s, z) = N - \sum_j \delta_{s^j}(z^j),
+\end{align}
+
+and let $h_{+}(s, z)$ represent the similarity between the sequences, defined as
+\begin{align}
+    h_{+}(s, z) = \sum_j \delta_{s^j}(z^j) = N - h(s, z).
+\end{align}
+
+The weight is computed only when $d_m^i$ coincides with the target token $x^i$ (\ie{} $\delta_{d_m^i}(x^i)=1$). In this case, the term can be expressed as:
+\begin{align}
+    \label{eqn:closed_form_forward_pf}
+    &\sum_{x_0} \prod_j \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] \\
+    &= \sum_{k=0}^{h_{+}(d_m, z)} \binom{h_{+}(d_m, z)}{k} \left(1-\kappa_t\right)^{N - h_{+}(d_m, z)} \left((K-1)\kappa_t\right)^{h_{+}(d_m, z) - k}.
+\end{align}
+
+To understand this transition, we first note that $d_m$ and $z$ are fixed in this scope, while $x_0$ is independent across each dimension and follows a uniform distribution. This implies that we only need to consider $x_0$. For an arbitrary dimension $j$, the cases can be divided into four possibilities, and the corresponding values of $\left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right]$ are as follows:
+\begin{description}
+    \item[Case 1.] $d_m^j = z^j$, $x_0^j = z^j$, $\left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = 1.$
+    \item[Case 2.] $d_m^j = z^j$, $x_0^j \neq z^j$, $\left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = \kappa_t.$
+    \item[Case 3.] $d_m^j \neq z^j$, $x_0^j = z^j$, $\left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = 1-\kappa_t.$
+    \item[Case 4.] $d_m^j \neq z^j$, $x_0^j \neq z^j$, $\left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = 0.$
+\end{description}
+
+Note that \textbf{Case 4} makes the term inside the product $\left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right]$ equal to zero. Thus, we only need to consider $x_0$ for which no dimension falls into \textbf{Case 4}. Among the $|K|^N$ possible choices of $x_0$, only $|K|^{h_{+}(d_m, z)}$ satisfy $x_0^j = z^j$ for all dimensions where $d_m^j \neq z^j$. We then classify the remaining cases according to the Hamming distance between $x_0$ and $d_m$. Note that the maximum value of $h_{+}(x_0, d_m)$ is $h_{+}(d_m, z)$. Let $k$ denote an integer in the range $0$ to $h_{+}(d_m, z)$. Then, the number of $x_0$ satisfying $h_{+}(x_0, d_m) = k$ is $\binom{h_{+}(d_m, z)}{k} (K-1)^{h_{+}(d_m, z)-k}$, and in this case the product term becomes
+\begin{align}
+    \label{eqn:forward_product_conversion}
+    \prod_j \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = (\kappa_t)^{h_{+}(d_m, z)-k}(1-\kappa_t)^{N-h_{+}(d_m, z)}.
+\end{align}
+
+We can then arrive at the equation above by summing over all possible $k$. Resuming the proof, the term can be further simplified as follows:
+\begin{align}
+    & \sum_{x_0} \prod_j \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] \label{eqn:closed_form_hard_part_start} \\
+    &= \sum_{k=0}^{h_{+}(d_m, z)} \binom{h_{+}(d_m, z)}{k} \left(1-\kappa_t\right)^{N - h_{+}(d_m, z)} \left((K-1)\kappa_t\right)^{h_{+}(d_m, z) - k} \\
+    &= \left(1-\kappa_t\right)^{N - h_{+}(d_m, z)} \sum_{k=0}^{h_{+}(d_m, z)} \binom{h_{+}(d_m, z)}{k} \left((K-1)\kappa_t\right)^{k} \\
+    &= \left(1-\kappa_t\right)^{N} \left(\frac{(K-1)\kappa_t + 1}{1-\kappa_t}\right)^{h_{+}(d_m, z)} \\
+    &= \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}. \label{eqn:closed_form_hard_part_end}
+\end{align}
+
+We define $\gamma := 1 + \frac{\kappa_t}{1-\kappa_t}K$, and by substituting this simplified expression into the noise predictor above, we finally obtain~\Eqref{eqn:closed_form_noise_predictor}.
+\begin{align}
+    p_{1|t}(x^i|z) &= \frac{\sum_{m=1}^M \delta_{d_m^i}(x^i) \sum_{x_0} \prod_j \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right]}{\sum_{m=1}^M \sum_{x_0} \prod_j \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right]} \\
+    &= \frac{\sum_{m=1}^M \delta_{d_m^i}(x^i) \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}}{\sum_{m=1}^M \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}} \\
+    &= \frac{\sum_{m=1}^M \delta_{d_m^i}(x^i) \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}}{\sum_{m=1}^M \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}} \\
+    &= \frac{\sum_{m=1}^M \delta_{d_m^i}(x^i) \gamma^{-h(d_m, z)}}{\sum_{m=1}^M \gamma^{-h(d_m, z)}}.
+\end{align}
+% ----------------------------------------------------
+
+% ----------------------------------------------------
+\subsection{Proof of Closed-form Backward Velocity in Discrete Flow Models}
+\label{subsec:appx_proof_backward_velocity_discrete}
+
+
+Similarly to the proof of the closed-form forward velocity in~\Secref{subsec:appx_proof_forward_velocity_discrete}, we start from the backward velocity in~\Eqref{eqn:backward_velocity}:
+%
+\begin{align}
+    \check{v_t}(x^i, z) = \frac{\dot{\kappa}_t}{\kappa_t}\left[\delta_{z^i}(x^i) - p_{0|t}(x^i|z)\right].
+\end{align}
+
+We derive the closed-form noise predictor as follows:
+\begin{align}
+    p_{0|t}(x^i|z) &= \sum_{x_0, x_1} \delta_{x_0^i}(x^i) p_t(x_0, x_1 | z) \\
+    &= \sum_{x_0, x_1} \delta_{x_0^i}(x^i) \frac{p_t(x_0, x_1, z)}{p_t(z)} \\
+    &= \frac{\sum_{x_0, x_1} \delta_{x_0^i}(x^i) p_t(x_0, x_1, z)}{p_t(z)} \\
+    &= \frac{\sum_{x_0, x_1} \delta_{x_0^i}(x^i) p_t(x_0, x_1, z)}{\sum_{x_0, x_1}p_t(x_0, x_1, z)},
+\end{align}
+The last expression is further expanded to:
+\begin{align}
+    p_{0|t}(x^i|z) &= \frac{\sum_{x_0, x_1} \delta_{x_0^i}(x^i) p_t(x_0, x_1, z)}{\sum_{x_0, x_1}p_t(x_0, x_1, z)} \\
+    &= \frac{\sum_{x_0,x_1}\delta_{x_0^i}(x^i)\,p_1(x_1)\,p_t(z| x_0,x_1)}
+    {\sum_{x_0,x_1}p_1(x_1)\,p_t(z |  x_0,x_1)} \\
+    &= \frac{\sum_{m=1}^M \sum_{x_0}\delta_{x_0^i}(x^i)\,\prod_{j=1}^N\!\big[\kappa_t\,\delta_{d_m^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big]}
+    {\sum_{m=1}^M \sum_{x_0}\prod_{j=1}^N\!\big[\kappa_t\,\delta_{d_m^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big]}.
+\end{align}
+
+For the denominator, we use the same formula as in~\Eqref{eqn:closed_form_hard_part_end}:
+\begin{align}
+    \sum_{m=1}^M \sum_{x_0} \prod_{j=1}^N \left[\kappa_t\delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = \sum_{m=1}^M \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}.
+\end{align}
+
+Next, for the numerator, we can rewrite it as:
+%To simplify the numerator, we break it down into four cases for the $i$-th dimension, considering the term
+\begin{align}
+&\sum_{m=1}^M \sum_{x_0}\delta_{x_0^i}(x^i)\,\prod_{j=1}^N\!\big[\kappa_t\,\delta_{d_m^j}(z^j)+(1-\kappa_t)\,\delta_{x_0^j}(z^j)\big] \\
+&=\sum_{m=1}^M \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \prod_j \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right].
+\end{align}
+The $i$-th index should be considered separately as $x_0^i$ is set to be equal to $x^i$. Separating the $j=i$ term from the product yields
+\begin{align}
+&\sum_{m=1}^M \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \left[\kappa_t \delta_{d_m^i}(z^i) + (1-\kappa_t)\delta_{x_0^i}(z^i)\right] \prod_{j \neq i} \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] \\
+& =\sum_{m=1}^M \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \left[\kappa_t \delta_{d_m^i}(z^i) + (1-\kappa_t)\delta_{x^i}(z^i)\right] \prod_{j \neq i} \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] \\
+& =\sum_{m=1}^M \left[\kappa_t \delta_{d_m^i}(z^i) + (1-\kappa_t)\delta_{x^i}(z^i)\right] \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \prod_{j \neq i} \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right].
+\end{align}
+%
+Since the $i$-th coordinate of $x_0$ is fixed to $x^{i}$, the summation over $x_0$ with $x_0^i = x^i$ no longer depends on this index. Consequently, when we consider the summation only over the remaining coordinates $j \neq i$, the resulting expression takes exactly the same form as the computation presented in ~\Secref{subsec:appx_proof_forward_velocity_discrete} (\Eqref{eqn:closed_form_hard_part_start}-\Eqref{eqn:closed_form_hard_part_end}). The only differences are that (i) the effective dimensionality of the product is reduced from $N$ to $N-1$, and (ii) the matching count term must exclude the $i$-th coordinate, yielding $h_{+}(d_m, z)$ to $h_{+}(d_m, z) - \delta_{d_m^{i}}(z^{i})$.
+%
+Reflecting these adjustments, we obtain
+\begin{align}
+    & \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \prod_{j \neq i} \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] = \left(1-\kappa_t\right)^{N-1} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z) - \delta_{d_m^i}(z^i)},
+\end{align}
+and
+\begin{align}
+    &\sum_{m=1}^M \left[\kappa_t \delta_{d_m^i}(z^i) + (1-\kappa_t)\delta_{x^i}(z^i)\right] \sum_{\substack{x_0 \text{ with} \\ x_0^i = x^i}} \prod_{j \neq i} \left[\kappa_t \delta_{d_m^j}(z^j) + (1-\kappa_t)\delta_{x_0^j}(z^j)\right] \\
+    &= \sum_{m=1}^M \left[\kappa_t \delta_{d_m^i}(z^i) + (1-\kappa_t)\delta_{x^i}(z^i)\right] \left(1-\kappa_t\right)^{N-1} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z) - \delta_{d_m^i}(z^i)} \\
+    &= \sum_{m=1}^M \left[\frac{\kappa_t}{1 - \kappa_t} \delta_{d_m^i}(z^i) + \delta_{x^i}(z^i)\right] \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z) - \delta_{d_m^i}(z^i)}.
+\end{align}
+Using this nominator, we can denote the closed-form noise predictor:
+\begin{align}
+    p_{0|t}(x^i|z) &= \frac{\sum_{m=1}^M \left[\frac{\kappa_t}{1 - \kappa_t} \delta_{d_m^i}(z^i) + \delta_{x^i}(z^i)\right] \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z) - \delta_{d_m^i}(z^i)}}{\sum_{m=1}^M \left(1-\kappa_t\right)^{N} \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z)}} \\
+    &= \sum_{m=1}^M \left[\frac{\kappa_t}{1 - \kappa_t} \delta_{d_m^i}(z^i) + \delta_{x^i}(z^i)\right] \frac{\left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_m, z) - \delta_{d_m^i}(z^i)}}{\sum_{m'=1}^M \left(1 + \frac{\kappa_t}{1-\kappa_t}K\right)^{h_{+}(d_{m'}, z)}} \\
+    &= \sum_{m=1}^M \left[\frac{\kappa_t}{1 - \kappa_t} \delta_{d_m^i}(z^i) + \delta_{x^i}(z^i)\right] \left[1 - \frac{K \kappa_t \ \delta_{d_m^i}(z^i)}{1 + (K-1)\kappa_t}\right] \frac{\gamma^{h_{+}(d_m, z)}}{\sum_{m'=1}^M \gamma^{h_{+}(d_{m'}, z)}} \\
+    &= \delta_{x^i}(z^i) - \frac{\kappa_t \left(K \delta_{x^i}(z^i) - 1\right)}{1 + (K-1)\kappa_t} \sum_{m=1}^M \delta_{d_m^i}(z^i) \frac{\gamma^{h_{+}(d_m, z)}}{\sum_{m'=1}^M \gamma^{h_{+}(d_{m'}, z)}},
+\end{align}
+where $\gamma := 1 + \frac{\kappa_t}{1-\kappa_t}K$.
+
+We can then express the closed-form backward velocity as follows:
+\begin{align}
+    \check{v_t}(x^i, z) &= \frac{\dot{\kappa}_t}{\kappa_t}\left[\delta_{z^i}(x^i) - p_{0|t}(x^i|z)\right] \\
+    &= \frac{\dot{\kappa}_t \left(K \delta_{x^i}(z^i) - 1\right)}{1 + (K-1) \kappa_t} \sum_{m=1}^M \delta_{d_m^i}(z^i) \frac{\gamma^{h_{+}(d_m, z)}}{\sum_{m'=1}^M \gamma^{h_{+}(d_{m'}, z)}} \\
+    &= \frac{\dot{\kappa}_t(K \delta_{x^i}(z^i)-1)}{1 + (K-1) \kappa_t}\sum_{m=1}^M \delta_{d_m^i}(z^i) \frac{\gamma^{-h(d_m, z)}}{\sum_{m'=1}^M \gamma^{-h(d_{m'}, z)}}.
+\end{align}
+
+Since $\kappa_t = 1$ for $t=1$, then $\gamma \rightarrow \infty$. So this equation is formally is not defined at $t=1$. Nevertheless, as $\lim_{t \rightarrow 1}$, the weighted sum over power of $\gamma$ is dominated by the maximum term, which converges to $1$. Hence, the expression can be rigorously interpreted as $\lim_{t \rightarrow 1}\check{v_t}(x^i, z)$, and in practice, this limiting value is used for sampling at $t=1$. 

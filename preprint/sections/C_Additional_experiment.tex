@@ -1,0 +1,44 @@
+
+\section{Additional Experiments}
+\label{sec:appendix_additional_experiment}
+
+\subsection{Coverage of training dataset by sampling with forward velocity}
+\label{subsec:coverage_forward_velocity}
+
+As discussed in~\Secref{subsec:closed_form_forward_velocity}, constructing pairs using the closed-form forward velocity with a training dataset of size $\lvert X_1 \rvert$ incurs significantly higher cost to achieve full coverage compared to using the backward velocity. Let $k$ denote the number of source samples drawn from the source (prior) distribution, assumed to be uniform in our work. The probability that a given element in the training set is selected is $\left(1 - \tfrac{1}{\lvert X_1 \rvert}\right)^k$. Accordingly, we denote by $\bar{k}$ the number of unique samples among the $k$ draws, whose expectation is: $\sum_{i=1}^{\lvert X_1 \rvert} \Big[ 1 - (1 - \frac{1}{\lvert X_1 \rvert})^k \Big] = \lvert X_1 \rvert \Big[  1 - (1 - \frac{1}{\lvert X_1 \rvert})^k \Big]$.
+In addition, we define the coverage as the ratio between the number of unique elements obtained through this sampling procedure and the training set size: $\text{COV} = \bar{k}/\vert X_1 \vert$.
+
+%%%%
+% Coverage Table
+\begin{table}[!t]
+\small
+\centering
+\caption{Summary of training set sizes $\vert X_1 \vert$ for each dataset, the number of unique samples $\bar{k}$ obtained by simulating paths using the closed-form forward velocity in~\Eqref{eqn:closed_forward_velocity}, and the corresponding coverage values: empirical ($\text{COV}$) and theoretically predicted ($\text{COV}_{\text{Pred}}$).
+}
+\label{tab:appendix_forward_velocity_coverage}
+\begin{tabular}{l|cccc}
+\toprule
+    & QM9 & ZINC-250k & MNIST-Binary & CIFAR-10      \\
+\midrule
+$|X_1| $ & 127,190 & 224,568 & 60,000 & 100,000 \\
+$\bar{k}$ & 77,104 &	140,779 &	37,711 &	63,117 \\
+$\text{COV}$ & 60.62\% & 62.68\% & 62.85\% & 63.11\% \\
+\midrule
+$\text{COV}_{\text{Pred}}$ & \multicolumn{4}{c}{63.21\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+%%%%
+
+To validate our claim in~\Secref{subsec:closed_form_forward_velocity}, we sample $k = \lvert X_1 \rvert$ data points $x_1$ by transporting source samples $x_0$, independently drawn from the uniform distribution, along the velocity field defined in~\Eqref{eqn:closed_forward_velocity}. Using these samples, we evaluate the coverage following the definition above. The dataset sizes, number of unique samples among the generated samples, and the empirical and theoretical coverages are summarized in~\Tabref{tab:appendix_forward_velocity_coverage}.
+These findings indicate that, even when sampling the same number of points as the training set size, only about $63\%$ of the training distribution can be recovered in practice. Achieving full coverage would therefore require a substantially larger number of samples, introducing significantly higher computational cost. Motivated by this finding, we instead propose tracing backward from data samples, using a closed-form velocity field that we derive for this purpose (\Secref{subsec:closed_form_backward_velocity}).
+
+% ----------------------------------------------------
+
+\subsection{Total Correlation analysis of closed-form velocity}
+\label{subsec:total_correlation_measure}
+
+As in~\Secref{subsec:rectified_flow}, \citet{Yoo:2025ReDi} demonstrated that iteratively refining the joint distribution of source-target pairs in discrete flow models improves few-step performance by reducing the total correlation of the model. In this section, we measure the total correlation following their methodology. Specifically, we perform sampling with neural networks, including UDLM~\citep{Schiff:2025UDLM} and \methodname{} trained on QM9~\citep{ramakrishnan2014quantum}, starting from identical initial states $x_0$ but with varying random seeds. We randomly select $20{,}000$ initial states $x_0$, and for each $x_0$, we generate 10 samples with a step size of 256. As shown in~\Tabref{tab:appendix_tc_measure}, \methodname{} achieves a lower total correlation, consistent with the improved performance observed in few-step sampling, as discussed above.
+
+% ----------------------------------------------------
+

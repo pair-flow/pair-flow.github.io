@@ -1,0 +1,100 @@
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Generative Perplexity ($\downarrow$) on LM1B~\citep{chelba2013exploringlm1b} measured with GPT2-large across different lengths ($D$) and pairing costs over NFE steps 4 to 1024. Best values per column are highlighted in bold.}
+% \label{tab:lm1b_gen_ppl}
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{l|l|ccccccccc}
+% \toprule
+% Dimension & Method & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 \\
+% \midrule
+% \multirow{2}{*}{\shortstack[l]{$D=16$}} 
+% & UDLM & 299.18 & 225.92 & 207.17 & 195.82 & 200.77 & \textbf{197.04} & 199.12 & \textbf{195.37} & 198.22 \\
+% & \methodname{} & \textbf{242.22} & \textbf{208.04} & \textbf{200.99} & \textbf{190.36} & \textbf{191.74} & 199.45 & \textbf{188.84} & 196.91 & \textbf{198.12} \\
+% \midrule
+% \multirow{2}{*}{\shortstack[l]{$D=32$}} 
+% & UDLM & 263.93 & 192.78 & 167.85 & 167.49 & 155.68 & 150.52 & 152.40 & 151.74 & 154.02 \\
+% & \methodname{} & \textbf{218.48} & \textbf{172.27} & \textbf{156.35} & \textbf{150.53} & \textbf{143.83} & \textbf{145.77} & \textbf{142.54} & \textbf{141.04} & \textbf{147.57} \\
+% \midrule
+% \multirow{2}{*}{\shortstack[l]{$D=64$}} 
+% & UDLM & 214.07 & 150.59 & 130.49 & 120.19 & 117.90 & 116.23 & 112.24 & 113.77 & 115.11 \\
+% & \methodname{} & \textbf{174.78} & \textbf{138.94} & \textbf{123.06} & \textbf{115.71} & \textbf{114.73} & \textbf{112.92} & \textbf{111.29} & \textbf{107.06} & \textbf{110.83} \\
+% \midrule
+% \multirow{2}{*}{\shortstack[l]{$D=128$}} 
+% & UDLM & 169.61 & 123.48 & 105.13 & 98.94 & 97.89 & 94.92 & 93.75 & 94.12 & 93.59 \\
+% & \methodname{} & \textbf{167.90} & \textbf{121.09} & \textbf{102.16} & \textbf{96.61} & \textbf{93.93} & \textbf{91.51} & \textbf{90.21} & \textbf{89.09} & \textbf{89.07} \\
+% \bottomrule
+% \end{tabular}
+% }
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Generative Perplexity ($\downarrow$) on LM1B~\citep{chelba2013lm1b} measured with GPT2-large across varying lengths ($N$) and their corresponding training iterations (Iter.) over NFE steps 4 to 1024. Best values are highlighted in bold.}
+\label{tab:lm1b_gen_ppl}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c|c|l|ccccccccc}
+\toprule
+$N$ & Iter. & Method & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 \\
+\midrule
+\multirow{2}{*}{16} & \multirow{2}{*}{200k}
+& UDLM & 299.18 & 225.92 & 207.17 & 195.82 & 200.77 & \textbf{197.04} & 199.12 & \textbf{195.37} & 198.22 \\
+& & \methodname{} & \textbf{242.22} & \textbf{208.04} & \textbf{200.99} & \textbf{190.36} & \textbf{191.74} & 199.45 & \textbf{188.84} & 196.91 & \textbf{198.12} \\
+\midrule
+\multirow{2}{*}{32} & \multirow{2}{*}{200k}
+& UDLM & 263.93 & 192.78 & 167.85 & 167.49 & 155.68 & 150.52 & 152.40 & 151.74 & 154.02 \\
+& & \methodname{} & \textbf{218.48} & \textbf{172.27} & \textbf{156.35} & \textbf{150.53} & \textbf{143.83} & \textbf{145.77} & \textbf{142.54} & \textbf{141.04} & \textbf{147.57} \\
+\midrule
+\multirow{2}{*}{64} & \multirow{2}{*}{400k}
+& UDLM & 214.07 & 150.59 & 130.49 & 120.19 & 117.90 & 116.23 & 112.24 & 113.77 & 115.11 \\
+& & \methodname{} & \textbf{174.78} & \textbf{138.94} & \textbf{123.06} & \textbf{115.71} & \textbf{114.73} & \textbf{112.92} & \textbf{111.29} & \textbf{107.06} & \textbf{110.83} \\
+\midrule
+\multirow{2}{*}{128} & \multirow{2}{*}{600k}
+& UDLM & 169.61 & 123.48 & 105.13 & 98.94 & 97.89 & 94.92 & 93.75 & 94.12 & 93.59 \\
+& & \methodname{} & \textbf{167.90} & \textbf{121.09} & \textbf{102.16} & \textbf{96.61} & \textbf{93.93} & \textbf{91.51} & \textbf{90.21} & \textbf{89.09} & \textbf{89.07} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Comparison of Entropy ($\uparrow$) on LM1B~\citep{chelba2013lm1b} across varying lengths ($N$) and training iterations (Iter.) over NFE steps 4 to 1024. Best values are highlighted in bold.}
+\label{tab:lm1b_entropy}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{c|c|l|ccccccccc}
+\toprule
+$N$ & Iter. & Method & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 \\
+\midrule
+\multirow{2}{*}{16} & \multirow{2}{*}{200k}
+& UDLM & 2.46 & \textbf{2.49} & 2.50 & 2.50 & 2.50 & 2.51 & 2.50 & 2.51 & 2.50 \\
+& & \methodname{} & \textbf{2.48} & \textbf{2.49} & \textbf{2.51} & \textbf{2.52} & \textbf{2.52} & \textbf{2.53} & \textbf{2.52} & \textbf{2.53} & \textbf{2.52} \\
+\midrule
+\multirow{2}{*}{32} & \multirow{2}{*}{200k}
+& UDLM & 3.05 & 3.09 & 3.12 & 3.13 & 3.13 & 3.13 & 3.13 & 3.13 & 3.13 \\
+& & \methodname{} & \textbf{3.06} & \textbf{3.12} & \textbf{3.13} & \textbf{3.14} & \textbf{3.15} & \textbf{3.15} & \textbf{3.15} & \textbf{3.15} & \textbf{3.16} \\
+\midrule
+\multirow{2}{*}{64} & \multirow{2}{*}{400k}
+& UDLM & \textbf{3.57} & 3.63 & 3.67 & 3.68 & 3.69 & 3.70 & 3.70 & 3.69 & 3.70 \\
+& & \methodname{} & \textbf{3.57} & \textbf{3.65} & \textbf{3.69} & \textbf{3.70} & \textbf{3.71} & \textbf{3.71} & \textbf{3.71} & \textbf{3.72} & \textbf{3.71} \\
+\midrule
+\multirow{2}{*}{128} & \multirow{2}{*}{600k}
+& UDLM & 3.98 & 4.09 & 4.14 & 4.16 & 4.17 & 4.17 & 4.17 & 4.18 & 4.18 \\
+& & \methodname{} & \textbf{4.00} & \textbf{4.11} & \textbf{4.16} & \textbf{4.18} & \textbf{4.19} & \textbf{4.20} & \textbf{4.20} & \textbf{4.19} & \textbf{4.20} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

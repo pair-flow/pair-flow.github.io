@@ -1,0 +1,21 @@
+\begin{table}[!t]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{FID scores ($\downarrow$) of~\methodname{} on CIFAR-10~\citep{krizhevsky2009learning} with continuous values, measured using FID over 5K samples across various NFE steps (1 to 1024). Best values are bolded.}
+\label{tab:continuous_cifar10}
+\begin{tabularx}{\textwidth}{
+l|YYYYYYYYYYY
+}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 & 128 & 256 & 512 & 1024 \\
+\midrule
+CondOT & 354.96 & 170.00 & 64.13 & \textbf{32.76} & \textbf{24.21} & \textbf{20.04} & \textbf{17.45} & \textbf{16.05} & \textbf{15.28} & \textbf{14.84} & \textbf{14.66} \\
+\methodname{} & \textbf{83.24} & \textbf{58.43} & \textbf{43.28} & 36.78 & 32.48 & 28.94 & 26.50 & 24.87 & 23.97 & 23.46 & 23.23 \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,43 @@
+\begin{table}[htbp]
+\centering
+\caption{text8 - gen.ppl. - greedy sampler} % 캡션은 내용에 맞게 수정
+\label{tab:text8_genppl_greedy} % 레이블은 원하는 대로 설정
+\begin{tabular}{lccccccc}
+\toprule
+Greedy & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+MDLM & 45.588 & 34.852 & 26.306 & 16.809 & 10.058 & 7.190 & 6.207 \\
+UDLM & 20.016 & 23.719 & 17.645 & 8.324 & 5.401 & 4.656 & 4.478 \\
+Ours (n20-t0.9) & 22.406 & 25.050 & 17.054 & 7.777 & 5.352 & 4.699 & 4.520 \\
+Ours (n256-t1.0) & 18.899 & 21.956 & 17.059 & 8.347 & 5.560 & 4.876 & 4.575 \\
+Ours (n1024-t1.0) & 19.265 & 22.839 & 16.394 & 7.806 & 5.432 & 4.724 & 4.538 \\
+\midrule
+UDLM + DCD & & & & & & & \\
+Ours + DCD & & & & & & & \\
+UDLM + Redi & & & & & & & \\
+Ours + Redi & & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{text8 - gen.ppl. - ancestral sampler} % 캡션은 내용에 맞게 수정
+\label{tab:text8_genppl_ancestral} % 레이블은 원하는 대로 설정
+\begin{tabular}{lccccccc}
+\toprule
+Ancestral & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+MDLM & 45.314 & 34.751 & 26.302 & 16.897 & 10.080 & 7.332 & 6.161 \\
+UDLM & 46.268 & 37.000 & 17.982 & 7.444 & 5.151 & 4.534 & 4.360 \\
+& 45.163 & 36.452 & 17.665 & 7.522 & 5.203 & 4.651 & 4.465 \\
+Ours (n256-t1.0) & 45.597 & 35.493 & 18.443 & 8.018 & 5.449 & 4.751 & 4.495 \\
+Ours (n1024-t1.0) & 46.174 & 35.547 & 16.995 & 7.475 & 5.321 & 4.666 & 4.467 \\
+\midrule
+UDLM + DCD & & & & & & & \\
+Ours + DCD & & & & & & & \\
+UDLM + Redi & & & & & & & \\
+Ours + Redi & & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}

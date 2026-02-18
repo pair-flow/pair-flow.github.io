@@ -1,0 +1,159 @@
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Validity scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps. Best values per column are highlighted in bold.}
+% \label{tab:qm9_rect_validity}
+% \setlength{\tabcolsep}{3.2pt}
+% % Y 컬럼 타입이 정의되지 않았다면 프리앰블에 다음을 추가하세요:
+% % \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \begin{tabularx}{\textwidth}{l|YYYYYYY}
+% \toprule
+% Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 17.5{\scriptsize$\pm$3.2} & 125.5{\scriptsize$\pm$11.8} & 497.6{\scriptsize$\pm$8.3} & 826.6{\scriptsize$\pm$10.3} & 953.5{\scriptsize$\pm$6.1} & 991.9{\scriptsize$\pm$4.2} & 1000.1{\scriptsize$\pm$3.5} \\
+% + Re-Flow & 59.7{\scriptsize$\pm$8.8} & 232.4{\scriptsize$\pm$9.2} & 588.4{\scriptsize$\pm$15.8} & 849.6{\scriptsize$\pm$14.2} & 940.5{\scriptsize$\pm$8.5} & 967.5{\scriptsize$\pm$5.2} & 978.8{\scriptsize$\pm$5.2} \\
+% + Re-Flow & 160.9{\scriptsize$\pm$11.8} & 368.0{\scriptsize$\pm$11.8} & 673.3{\scriptsize$\pm$11.2} & 878.5{\scriptsize$\pm$11.6} & 945.4{\scriptsize$\pm$8.1} & 967.9{\scriptsize$\pm$7.4} & 975.8{\scriptsize$\pm$8.0} \\
+% + Re-Flow & 280.2{\scriptsize$\pm$6.7} & 470.7{\scriptsize$\pm$18.6} & 742.2{\scriptsize$\pm$18.7} & 897.9{\scriptsize$\pm$9.4} & 945.3{\scriptsize$\pm$5.2} & 965.0{\scriptsize$\pm$5.9} & 972.6{\scriptsize$\pm$7.1} \\
+% \midrule
+% \methodname{} & 223.4{\scriptsize$\pm$12.7} & 416.0{\scriptsize$\pm$12.4} & 734.9{\scriptsize$\pm$7.2} & 921.5{\scriptsize$\pm$11.0} & 977.1{\scriptsize$\pm$3.9} & 990.9{\scriptsize$\pm$5.9} & 1000.2{\scriptsize$\pm$4.5} \\
+% + Re-Flow & 361.0{\scriptsize$\pm$115.2} & 512.6{\scriptsize$\pm$44.2} & 775.7{\scriptsize$\pm$10.0} & 929.1{\scriptsize$\pm$11.6} & 976.2{\scriptsize$\pm$4.5} & 985.6{\scriptsize$\pm$6.7} & 993.1{\scriptsize$\pm$7.1} \\
+% + Re-Flow & 443.4{\scriptsize$\pm$13.4} & 598.6{\scriptsize$\pm$18.4} & 823.0{\scriptsize$\pm$16.0} & 935.2{\scriptsize$\pm$7.7} & 969.0{\scriptsize$\pm$5.7} & 984.1{\scriptsize$\pm$6.0} & 989.0{\scriptsize$\pm$3.8} \\
+% + Re-Flow & 529.2{\scriptsize$\pm$10.6} & 688.0{\scriptsize$\pm$11.3} & 863.6{\scriptsize$\pm$9.5} & 945.9{\scriptsize$\pm$4.5} & 975.7{\scriptsize$\pm$6.1} & 982.6{\scriptsize$\pm$7.1} & 990.2{\scriptsize$\pm$7.2} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{validity scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively.}
+\label{tab:qm9_rect_validity}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 17.5{\scriptsize$\pm$3.2} & 125.5{\scriptsize$\pm$11.8} & 497.6{\scriptsize$\pm$8.3} & 826.6{\scriptsize$\pm$10.3} & 953.5{\scriptsize$\pm$6.1} & \textbf{991.9{\scriptsize$\pm$4.2}} & \underline{1000.1{\scriptsize$\pm$3.5}} \\
++ Re-Flow & 59.7{\scriptsize$\pm$8.8} & 232.4{\scriptsize$\pm$9.2} & 588.4{\scriptsize$\pm$15.8} & 849.6{\scriptsize$\pm$14.2} & 940.5{\scriptsize$\pm$8.5} & 967.5{\scriptsize$\pm$5.2} & 978.8{\scriptsize$\pm$5.2} \\
++ Re-Flow & 160.9{\scriptsize$\pm$11.8} & 368.0{\scriptsize$\pm$11.8} & 673.3{\scriptsize$\pm$11.2} & 878.5{\scriptsize$\pm$11.6} & 945.4{\scriptsize$\pm$8.1} & 967.9{\scriptsize$\pm$7.4} & 975.8{\scriptsize$\pm$8.0} \\
++ Re-Flow & 280.2{\scriptsize$\pm$6.7} & 470.7{\scriptsize$\pm$18.6} & 742.2{\scriptsize$\pm$18.7} & 897.9{\scriptsize$\pm$9.4} & 945.3{\scriptsize$\pm$5.2} & 965.0{\scriptsize$\pm$5.9} & 972.6{\scriptsize$\pm$7.1} \\
+\midrule
+\methodname{} & 223.4{\scriptsize$\pm$12.7} & 416.0{\scriptsize$\pm$12.4} & 734.9{\scriptsize$\pm$7.2} & 921.5{\scriptsize$\pm$11.0} & \textbf{977.1{\scriptsize$\pm$3.9}} & \underline{990.9{\scriptsize$\pm$5.9}} & \textbf{1000.2{\scriptsize$\pm$4.5}} \\
++ Re-Flow & 361.0{\scriptsize$\pm$115.2} & 512.6{\scriptsize$\pm$44.2} & 775.7{\scriptsize$\pm$10.0} & 929.1{\scriptsize$\pm$11.6} & \underline{976.2{\scriptsize$\pm$4.5}} & 985.6{\scriptsize$\pm$6.7} & 993.1{\scriptsize$\pm$7.1} \\
++ Re-Flow & \underline{443.4{\scriptsize$\pm$13.4}} & \underline{598.6{\scriptsize$\pm$18.4}} & \underline{823.0{\scriptsize$\pm$16.0}} & \underline{935.2{\scriptsize$\pm$7.7}} & 969.0{\scriptsize$\pm$5.7} & 984.1{\scriptsize$\pm$6.0} & 989.0{\scriptsize$\pm$3.8} \\
++ Re-Flow & \textbf{529.2{\scriptsize$\pm$10.6}} & \textbf{688.0{\scriptsize$\pm$11.3}} & \textbf{863.6{\scriptsize$\pm$9.5}} & \textbf{945.9{\scriptsize$\pm$4.5}} & 975.7{\scriptsize$\pm$6.1} & 982.6{\scriptsize$\pm$7.1} & 990.2{\scriptsize$\pm$7.2} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Uniqueness scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps. Best values per column are highlighted in bold.}
+% \label{tab:qm9_rect_uniqueness}
+% \setlength{\tabcolsep}{3.2pt}
+% % Y 컬럼 타입이 정의되지 않았다면 프리앰블에 다음을 추가하세요:
+% % \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \begin{tabularx}{\textwidth}{l|YYYYYYY}
+% \toprule
+% Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 17.5{\scriptsize$\pm$3.2} & 125.4{\scriptsize$\pm$11.7} & 495.0{\scriptsize$\pm$8.2} & 819.5{\scriptsize$\pm$11.4} & 943.0{\scriptsize$\pm$5.7} & 979.1{\scriptsize$\pm$5.0} & 990.0{\scriptsize$\pm$4.7} \\
+% + Re-Flow & 59.7{\scriptsize$\pm$8.8} & 231.6{\scriptsize$\pm$9.5} & 581.0{\scriptsize$\pm$15.1} & 834.7{\scriptsize$\pm$11.4} & 917.5{\scriptsize$\pm$9.6} & 944.8{\scriptsize$\pm$6.2} & 956.1{\scriptsize$\pm$5.2} \\
+% + Re-Flow & 159.4{\scriptsize$\pm$10.9} & 363.3{\scriptsize$\pm$12.2} & 657.2{\scriptsize$\pm$9.3} & 846.3{\scriptsize$\pm$11.8} & 910.8{\scriptsize$\pm$7.3} & 930.5{\scriptsize$\pm$9.3} & 938.8{\scriptsize$\pm$11.7} \\
+% + Re-Flow & 275.6{\scriptsize$\pm$7.2} & 456.3{\scriptsize$\pm$17.7} & 712.1{\scriptsize$\pm$15.7} & 856.8{\scriptsize$\pm$10.3} & 899.0{\scriptsize$\pm$4.9} & 907.0{\scriptsize$\pm$10.9} & 918.9{\scriptsize$\pm$5.7} \\
+% \midrule
+% \methodname{} & 223.0{\scriptsize$\pm$12.3} & 414.7{\scriptsize$\pm$12.0} & 731.4{\scriptsize$\pm$6.9} & 917.4{\scriptsize$\pm$11.8} & 971.6{\scriptsize$\pm$4.3} & 986.2{\scriptsize$\pm$5.3} & 994.8{\scriptsize$\pm$5.2} \\
+% + Re-Flow & 359.5{\scriptsize$\pm$113.1} & 507.7{\scriptsize$\pm$43.0} & 765.3{\scriptsize$\pm$8.8} & 913.5{\scriptsize$\pm$10.2} & 959.7{\scriptsize$\pm$5.8} & 968.8{\scriptsize$\pm$8.4} & 973.0{\scriptsize$\pm$9.6} \\
+% + Re-Flow & 437.9{\scriptsize$\pm$13.8} & 586.7{\scriptsize$\pm$17.9} & 801.0{\scriptsize$\pm$15.4} & 906.5{\scriptsize$\pm$10.1} & 939.1{\scriptsize$\pm$6.2} & 955.9{\scriptsize$\pm$7.2} & 960.2{\scriptsize$\pm$6.5} \\
+% + Re-Flow & 516.9{\scriptsize$\pm$10.8} & 662.8{\scriptsize$\pm$13.4} & 828.7{\scriptsize$\pm$8.4} & 903.2{\scriptsize$\pm$4.7} & 932.5{\scriptsize$\pm$9.5} & 942.8{\scriptsize$\pm$4.8} & 949.6{\scriptsize$\pm$8.4} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Uniqueness scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively.}
+\label{tab:qm9_rect_uniqueness}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 17.5{\scriptsize$\pm$3.2} & 125.4{\scriptsize$\pm$11.7} & 495.0{\scriptsize$\pm$8.2} & 819.5{\scriptsize$\pm$11.4} & 943.0{\scriptsize$\pm$5.7} & \underline{979.1{\scriptsize$\pm$5.0}} & \underline{990.0{\scriptsize$\pm$4.7}} \\
++ Re-Flow & 59.7{\scriptsize$\pm$8.8} & 231.6{\scriptsize$\pm$9.5} & 581.0{\scriptsize$\pm$15.1} & 834.7{\scriptsize$\pm$11.4} & 917.5{\scriptsize$\pm$9.6} & 944.8{\scriptsize$\pm$6.2} & 956.1{\scriptsize$\pm$5.2} \\
++ Re-Flow & 159.4{\scriptsize$\pm$10.9} & 363.3{\scriptsize$\pm$12.2} & 657.2{\scriptsize$\pm$9.3} & 846.3{\scriptsize$\pm$11.8} & 910.8{\scriptsize$\pm$7.3} & 930.5{\scriptsize$\pm$9.3} & 938.8{\scriptsize$\pm$11.7} \\
++ Re-Flow & 275.6{\scriptsize$\pm$7.2} & 456.3{\scriptsize$\pm$17.7} & 712.1{\scriptsize$\pm$15.7} & 856.8{\scriptsize$\pm$10.3} & 899.0{\scriptsize$\pm$4.9} & 907.0{\scriptsize$\pm$10.9} & 918.9{\scriptsize$\pm$5.7} \\
+\midrule
+\methodname{} & 223.0{\scriptsize$\pm$12.3} & 414.7{\scriptsize$\pm$12.0} & 731.4{\scriptsize$\pm$6.9} & \textbf{917.4{\scriptsize$\pm$11.8}} & \textbf{971.6{\scriptsize$\pm$4.3}} & \textbf{986.2{\scriptsize$\pm$5.3}} & \textbf{994.8{\scriptsize$\pm$5.2}} \\
++ Re-Flow & 359.5{\scriptsize$\pm$113.1} & 507.7{\scriptsize$\pm$43.0} & 765.3{\scriptsize$\pm$8.8} & \underline{913.5{\scriptsize$\pm$10.2}} & \underline{959.7{\scriptsize$\pm$5.8}} & 968.8{\scriptsize$\pm$8.4} & 973.0{\scriptsize$\pm$9.6} \\
++ Re-Flow & \underline{437.9{\scriptsize$\pm$13.8}} & \underline{586.7{\scriptsize$\pm$17.9}} & \underline{801.0{\scriptsize$\pm$15.4}} & 906.5{\scriptsize$\pm$10.1} & 939.1{\scriptsize$\pm$6.2} & 955.9{\scriptsize$\pm$7.2} & 960.2{\scriptsize$\pm$6.5} \\
++ Re-Flow & \textbf{516.9{\scriptsize$\pm$10.8}} & \textbf{662.8{\scriptsize$\pm$13.4}} & \textbf{828.7{\scriptsize$\pm$8.4}} & 903.2{\scriptsize$\pm$4.7} & 932.5{\scriptsize$\pm$9.5} & 942.8{\scriptsize$\pm$4.8} & 949.6{\scriptsize$\pm$8.4} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Novelty scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps. Best values per column are highlighted in bold.}
+% \label{tab:qm9_rect_novelty}
+% \setlength{\tabcolsep}{3.2pt}
+% % Y 컬럼 타입이 정의되지 않았다면 프리앰블에 다음을 추가하세요:
+% % \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \begin{tabularx}{\textwidth}{l|YYYYYYY}
+% \toprule
+% Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 13.8{\scriptsize$\pm$2.9} & 52.0{\scriptsize$\pm$8.2} & 120.0{\scriptsize$\pm$3.8} & 152.4{\scriptsize$\pm$9.1} & 144.2{\scriptsize$\pm$12.4} & 147.2{\scriptsize$\pm$9.7} & 145.1{\scriptsize$\pm$9.0} \\
+% + Re-Flow & 31.4{\scriptsize$\pm$8.0} & 73.3{\scriptsize$\pm$7.1} & 110.4{\scriptsize$\pm$12.2} & 126.8{\scriptsize$\pm$8.9} & 116.3{\scriptsize$\pm$8.4} & 120.2{\scriptsize$\pm$9.0} & 117.6{\scriptsize$\pm$7.1} \\
+% + Re-Flow & 61.1{\scriptsize$\pm$6.5} & 103.0{\scriptsize$\pm$8.6} & 129.0{\scriptsize$\pm$9.7} & 124.6{\scriptsize$\pm$12.5} & 128.3{\scriptsize$\pm$5.6} & 128.4{\scriptsize$\pm$10.6} & 122.8{\scriptsize$\pm$9.4} \\
+% + Re-Flow & 91.2{\scriptsize$\pm$9.2} & 116.4{\scriptsize$\pm$8.1} & 127.2{\scriptsize$\pm$8.3} & 124.2{\scriptsize$\pm$9.3} & 121.9{\scriptsize$\pm$6.0} & 117.0{\scriptsize$\pm$4.9} & 121.8{\scriptsize$\pm$8.0} \\
+% \midrule
+% \methodname{} & 68.8{\scriptsize$\pm$7.8} & 85.6{\scriptsize$\pm$10.0} & 109.2{\scriptsize$\pm$7.8} & 96.8{\scriptsize$\pm$9.9} & 106.5{\scriptsize$\pm$12.5} & 108.9{\scriptsize$\pm$9.4} & 110.0{\scriptsize$\pm$9.9} \\
+% + Re-Flow & 84.2{\scriptsize$\pm$11.3} & 92.0{\scriptsize$\pm$6.9} & 101.1{\scriptsize$\pm$9.6} & 98.6{\scriptsize$\pm$8.4} & 98.8{\scriptsize$\pm$13.9} & 95.8{\scriptsize$\pm$8.3} & 98.9{\scriptsize$\pm$7.5} \\
+% + Re-Flow & 100.8{\scriptsize$\pm$7.7} & 109.5{\scriptsize$\pm$8.7} & 101.0{\scriptsize$\pm$6.8} & 101.1{\scriptsize$\pm$7.8} & 94.5{\scriptsize$\pm$6.6} & 95.6{\scriptsize$\pm$9.6} & 99.0{\scriptsize$\pm$8.8} \\
+% + Re-Flow & 114.6{\scriptsize$\pm$9.4} & 108.0{\scriptsize$\pm$5.9} & 106.5{\scriptsize$\pm$8.9} & 96.2{\scriptsize$\pm$9.8} & 95.6{\scriptsize$\pm$9.0} & 94.8{\scriptsize$\pm$7.1} & 95.7{\scriptsize$\pm$8.2} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Novelty scores ($\uparrow$) on QM9~\citep{ramakrishnan2014quantum} for UDLM and \methodname{} across varying rectification steps and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively.}
+\label{tab:qm9_rect_novelty}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 13.8{\scriptsize$\pm$2.9} & 52.0{\scriptsize$\pm$8.2} & 120.0{\scriptsize$\pm$3.8} & \textbf{152.4{\scriptsize$\pm$9.1}} & \textbf{144.2{\scriptsize$\pm$12.4}} & \textbf{147.2{\scriptsize$\pm$9.7}} & \textbf{145.1{\scriptsize$\pm$9.0}} \\
++ Re-Flow & 31.4{\scriptsize$\pm$8.0} & 73.3{\scriptsize$\pm$7.1} & 110.4{\scriptsize$\pm$12.2} & \underline{126.8{\scriptsize$\pm$8.9}} & 116.3{\scriptsize$\pm$8.4} & 120.2{\scriptsize$\pm$9.0} & 117.6{\scriptsize$\pm$7.1} \\
++ Re-Flow & 61.1{\scriptsize$\pm$6.5} & 103.0{\scriptsize$\pm$8.6} & \textbf{129.0{\scriptsize$\pm$9.7}} & 124.6{\scriptsize$\pm$12.5} & \underline{128.3{\scriptsize$\pm$5.6}} & \underline{128.4{\scriptsize$\pm$10.6}} & \underline{122.8{\scriptsize$\pm$9.4}} \\
++ Re-Flow & 91.2{\scriptsize$\pm$9.2} & \textbf{116.4{\scriptsize$\pm$8.1}} & \underline{127.2{\scriptsize$\pm$8.3}} & 124.2{\scriptsize$\pm$9.3} & 121.9{\scriptsize$\pm$6.0} & 117.0{\scriptsize$\pm$4.9} & 121.8{\scriptsize$\pm$8.0} \\
+\midrule
+\methodname{} & 68.8{\scriptsize$\pm$7.8} & 85.6{\scriptsize$\pm$10.0} & 109.2{\scriptsize$\pm$7.8} & 96.8{\scriptsize$\pm$9.9} & 106.5{\scriptsize$\pm$12.5} & 108.9{\scriptsize$\pm$9.4} & 110.0{\scriptsize$\pm$9.9} \\
++ Re-Flow & 84.2{\scriptsize$\pm$11.3} & 92.0{\scriptsize$\pm$6.9} & 101.1{\scriptsize$\pm$9.6} & 98.6{\scriptsize$\pm$8.4} & 98.8{\scriptsize$\pm$13.9} & 95.8{\scriptsize$\pm$8.3} & 98.9{\scriptsize$\pm$7.5} \\
++ Re-Flow & \underline{100.8{\scriptsize$\pm$7.7}} & \underline{109.5{\scriptsize$\pm$8.7}} & 101.0{\scriptsize$\pm$6.8} & 101.1{\scriptsize$\pm$7.8} & 94.5{\scriptsize$\pm$6.6} & 95.6{\scriptsize$\pm$9.6} & 99.0{\scriptsize$\pm$8.8} \\
++ Re-Flow & \textbf{114.6{\scriptsize$\pm$9.4}} & 108.0{\scriptsize$\pm$5.9} & 106.5{\scriptsize$\pm$8.9} & 96.2{\scriptsize$\pm$9.8} & 95.6{\scriptsize$\pm$9.0} & 94.8{\scriptsize$\pm$7.1} & 95.7{\scriptsize$\pm$8.2} \\
+\bottomrule
+\end{tabularx}
+\end{table}

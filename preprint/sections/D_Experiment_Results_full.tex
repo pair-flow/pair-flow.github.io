@@ -1,0 +1,20 @@
+
+\section{Detailed Experimental Results}
+\label{sec:appendix_results_full}
+
+In this section, we provide the detailed experimental results corresponding to those summarized in~\Secref{sec:results}. For the molecular datasets (QM9~\citep{ramakrishnan2014quantum} and ZINC-250k~\citep{irwin2012zinc}), we generate 1,024 samples across varying timesteps and evaluate validity, uniqueness, and novelty. Reported values are averaged over 10 trials, with standard deviations also included. For the image domain, we report FID on MNIST-Binary~\citep{lecun2002gradient}, and both FID~\citep{Heusel:2017FID} and IS~\citep{Salimans:2016IS} on CIFAR-10~\citep{krizhevsky2009learning}. 
+%
+Detailed experimental settings are provided in~\Secref{subsec:experiment_setting}.
+
+%%%%
+Results on QM9 are presented in Tables~\ref{tab:qm9_results_valid},~\ref{tab:qm9_results_unique}, and~\ref{tab:qm9_results_novel}, reporting validity, uniqueness, and novelty, respectively. Corresponding results on ZINC-250k are shown in Tables~\ref{tab:zinc_results_valid},~\ref{tab:zinc_results_unique}, and~\ref{tab:zinc_results_novel}. Finally, results for the image datasets are summarized in~\Tabref{tab:binary_mnist_results} (FID on MNIST-Binary) and~\Tabref{tab:cifar10_results} (FID and IS on CIFAR-10).
+%
+The FID measured on MNIST-Binary~\citep{lecun2002gradient}, FID and IS measured on CIFAR-10~\citep{krizhevsky2009learning}, are summarized in~\Tabref{tab:binary_mnist_results} and~\Tabref{tab:cifar10_results}, respectively.
+%%%%
+
+\clearpage
+
+\input{tables/92_qm9_discrete_full}
+\input{tables/94_zinc250_discrete_full}
+\input{tables/91_mnist_binary_discrete_full}
+\input{tables/93_cifar10_discrete_full}

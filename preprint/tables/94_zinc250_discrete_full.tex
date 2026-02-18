@@ -1,0 +1,80 @@
+\begin{table}[H]
+\small
+% \scriptsize
+\centering
+\caption{Validity scores ($\uparrow$) on ZINC-250k~\citep{irwin2012zinc} for various methods across different steps. Best values per column are highlighted in bold.}
+\setlength{\tabcolsep}{3.2pt}
+\label{tab:zinc_results_valid}
+% \begin{tabular}{l|ccccccc}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+% \midrule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+MDLM & \textbf{15.0}{\scriptsize$\pm$4.0} & 79.4{\scriptsize$\pm$4.7} & 194.6{\scriptsize$\pm$15.1} & 351.3{\scriptsize$\pm$20.6} & 463.7{\scriptsize$\pm$17.7} & 553.9{\scriptsize$\pm$10.7} & 610.1{\scriptsize$\pm$17.6} \\
+UDLM & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3}{\scriptsize$\pm$12.7} & \textbf{921.5}{\scriptsize$\pm$8.5} & \textbf{937.3}{\scriptsize$\pm$3.9} \\
+Random & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\methodname{} & 9.9{\scriptsize$\pm$2.3} & \textbf{146.3}{\scriptsize$\pm$10.4} & \textbf{533.9}{\scriptsize$\pm$13.9} & \textbf{799.4}{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\midrule
+UDLM + DCD & 25.7{\scriptsize$\pm$4.7} & 323.9{\scriptsize$\pm$12.5} & 718.2{\scriptsize$\pm$13.5} & \textbf{873.5}{\scriptsize$\pm$8.4} & \textbf{919.8}{\scriptsize$\pm$10.0} & \textbf{933.1}{\scriptsize$\pm$5.9} & \textbf{942.2}{\scriptsize$\pm$4.3} \\
+\methodname{} + DCD & \textbf{114.9}{\scriptsize$\pm$14.3} & \textbf{436.3}{\scriptsize$\pm$16.5} & \textbf{725.1}{\scriptsize$\pm$11.5} & 858.2{\scriptsize$\pm$10.0} & 896.5{\scriptsize$\pm$8.2} & 900.9{\scriptsize$\pm$9.5} & 907.1{\scriptsize$\pm$13.7} \\
+\midrule
+UDLM + Redi & 0.7{\scriptsize$\pm$0.8} & 75.9{\scriptsize$\pm$7.9} & 424.8{\scriptsize$\pm$16.6} & 734.4{\scriptsize$\pm$8.6} & 856.3{\scriptsize$\pm$11.3} & 892.2{\scriptsize$\pm$10.4} & 900.1{\scriptsize$\pm$10.8} \\
+\methodname{} + Redi & \textbf{46.3}{\scriptsize$\pm$6.3} & \textbf{221.5}{\scriptsize$\pm$11.0} & \textbf{562.8}{\scriptsize$\pm$12.7} & \textbf{793.6}{\scriptsize$\pm$8.4} & \textbf{869.3}{\scriptsize$\pm$14.2} & \textbf{897.4}{\scriptsize$\pm$9.1} & \textbf{907.0}{\scriptsize$\pm$10.5} \\
+\bottomrule
+\end{tabularx}
+\end{table} 
+
+
+\begin{table}[H]
+\small
+% \scriptsize
+\centering
+\caption{Uniqueness scores ($\uparrow$) on ZINC-250k~\citep{irwin2012zinc} for various methods across different steps. Best values per column are highlighted in bold.}
+\setlength{\tabcolsep}{3.2pt}
+\label{tab:zinc_results_unique}
+% \begin{tabular}{l|ccccccc}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+% \midrule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+MDLM & 7.4{\scriptsize$\pm$2.7} & 32.7{\scriptsize$\pm$2.4} & 105.1{\scriptsize$\pm$8.3} & 256.0{\scriptsize$\pm$18.3} & 392.6{\scriptsize$\pm$16.6} & 511.3{\scriptsize$\pm$14.0} & 582.4{\scriptsize$\pm$17.3} \\
+UDLM & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3}{\scriptsize$\pm$12.7} & \textbf{921.5}{\scriptsize$\pm$8.5} & \textbf{937.2}{\scriptsize$\pm$3.8} \\
+Random & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\methodname{} & \textbf{9.9}{\scriptsize$\pm$2.3} & \textbf{146.3}{\scriptsize$\pm$10.4} & \textbf{533.9}{\scriptsize$\pm$13.9} & \textbf{799.4}{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\midrule
+UDLM + DCD & 25.7{\scriptsize$\pm$4.7} & 323.9{\scriptsize$\pm$12.5} & 718.2{\scriptsize$\pm$13.5} & \textbf{873.5}{\scriptsize$\pm$8.4} & \textbf{919.8}{\scriptsize$\pm$10.0} & \textbf{933.1}{\scriptsize$\pm$5.9} & \textbf{942.2}{\scriptsize$\pm$4.3} \\
+\methodname{} + DCD & \textbf{114.9}{\scriptsize$\pm$14.3} & \textbf{436.3}{\scriptsize$\pm$16.5} & \textbf{725.1}{\scriptsize$\pm$11.5} & 858.2{\scriptsize$\pm$10.0} & 896.5{\scriptsize$\pm$8.2} & 900.9{\scriptsize$\pm$9.5} & 907.1{\scriptsize$\pm$13.7} \\
+\midrule
+UDLM + Redi & 0.7{\scriptsize$\pm$0.8} & 75.9{\scriptsize$\pm$7.9} & 424.8{\scriptsize$\pm$16.6} & 734.3{\scriptsize$\pm$8.7} & 856.3{\scriptsize$\pm$11.3} & 892.2{\scriptsize$\pm$10.4} & 900.0{\scriptsize$\pm$10.9} \\
+\methodname{} + Redi & \textbf{46.3}{\scriptsize$\pm$6.3} & \textbf{221.5}{\scriptsize$\pm$11.0} & \textbf{562.8}{\scriptsize$\pm$12.7} & \textbf{793.6}{\scriptsize$\pm$8.4} & \textbf{869.3}{\scriptsize$\pm$14.2} & \textbf{897.4}{\scriptsize$\pm$9.1} & \textbf{907.0}{\scriptsize$\pm$10.5} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\small
+% \scriptsize
+\centering
+\caption{Novelty scores ($\uparrow$) on ZINC-250k~\citep{irwin2012zinc} for various methods across different steps. Best values per column are highlighted in bold.}
+\setlength{\tabcolsep}{3.2pt}
+\label{tab:zinc_results_novel}
+% \begin{tabular}{l|ccccccc}
+\begin{tabularx}{\textwidth}{l|YYYYYYY}
+\toprule
+Method & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+MDLM & 3.8{\scriptsize$\pm$2.7} & 24.2{\scriptsize$\pm$2.6} & 84.5{\scriptsize$\pm$7.4} & 228.3{\scriptsize$\pm$17.1} & 372.0{\scriptsize$\pm$15.2} & 494.5{\scriptsize$\pm$15.2} & 569.3{\scriptsize$\pm$17.1} \\
+UDLM & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3}{\scriptsize$\pm$12.7} & \textbf{921.3}{\scriptsize$\pm$8.8} & \textbf{936.9}{\scriptsize$\pm$4.1} \\
+Random & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\methodname{} & \textbf{9.9}{\scriptsize$\pm$2.3} & \textbf{146.3}{\scriptsize$\pm$10.4} & \textbf{533.9}{\scriptsize$\pm$13.9} & \textbf{799.4}{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\midrule
+UDLM + DCD & 25.7{\scriptsize$\pm$4.7} & 323.9{\scriptsize$\pm$12.5} & 718.2{\scriptsize$\pm$13.5} & \textbf{873.5}{\scriptsize$\pm$8.4} & \textbf{919.7}{\scriptsize$\pm$9.9} & \textbf{933.0}{\scriptsize$\pm$5.8} & \textbf{942.2}{\scriptsize$\pm$4.3} \\
+\methodname{} + DCD & \textbf{114.9}{\scriptsize$\pm$14.3} & \textbf{436.3}{\scriptsize$\pm$16.5} & \textbf{725.1}{\scriptsize$\pm$11.5} & 858.2{\scriptsize$\pm$10.0} & 896.4{\scriptsize$\pm$8.3} & 900.9{\scriptsize$\pm$9.5} & 907.1{\scriptsize$\pm$13.7} \\
+\midrule
+UDLM + Redi & 0.7{\scriptsize$\pm$0.8} & 75.9{\scriptsize$\pm$7.9} & 424.8{\scriptsize$\pm$16.6} & 734.3{\scriptsize$\pm$8.7} & 856.3{\scriptsize$\pm$11.3} & 892.1{\scriptsize$\pm$10.5} & 900.0{\scriptsize$\pm$10.9} \\
+\methodname{} + Redi & \textbf{46.3}{\scriptsize$\pm$6.3} & \textbf{221.5}{\scriptsize$\pm$11.0} & \textbf{562.8}{\scriptsize$\pm$12.7} & \textbf{793.5}{\scriptsize$\pm$8.3} & \textbf{869.3}{\scriptsize$\pm$14.2} & \textbf{897.4}{\scriptsize$\pm$9.1} & \textbf{907.0}{\scriptsize$\pm$10.5} \\
+\bottomrule
+\end{tabularx}
+\end{table}

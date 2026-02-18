@@ -1,0 +1,146 @@
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Validity scores ($\uparrow$) on Zinc-250k~\citep{irwin2012zinc} across varying numbers of subsets. Best values per column are highlighted in bold. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration, measured in wall-clock time using an RTX A6000 GPU.}
+% \label{tab:zinc250k_subset_validity}
+% \setlength{\tabcolsep}{3.2pt}
+% % Y 컬럼 타입이 정의되지 않았다면 프리앰블에 다음을 추가하세요:
+% % \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+% \toprule
+% Method & $T_{\methodname{}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & 887.3{\scriptsize$\pm$12.7} & 921.5{\scriptsize$\pm$8.5} & 937.3{\scriptsize$\pm$3.9} \\
+% Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+% \midrule
+% \multicolumn{2}{C}{\textit{\methodname{}}} \\
+% \midrule
+% Full-set & 13m & 9.9{\scriptsize$\pm$2.3} & 146.3{\scriptsize$\pm$10.4} & 533.9{\scriptsize$\pm$13.9} & 799.4{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+% 2-Subset & 6m & 10.6{\scriptsize$\pm$2.8} & 145.7{\scriptsize$\pm$13.5} & 530.6{\scriptsize$\pm$20.3} & 802.5{\scriptsize$\pm$6.9} & 882.6{\scriptsize$\pm$7.1} & 902.4{\scriptsize$\pm$13.4} & 911.5{\scriptsize$\pm$9.2} \\
+% 4-Subset & 2.9m & 12.1{\scriptsize$\pm$3.3} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.9{\scriptsize$\pm$7.9} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+% 8-Subset & 1.5m & 12.3{\scriptsize$\pm$2.5} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Validity scores ($\uparrow$) on the Zinc-250k dataset~\citep{irwin2012zinc} evaluated across different subset partitions and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration, measured in wall-clock time using an RTX A6000 GPU.}
+\label{tab:zinc250k_subset_validity}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+\toprule
+Method & $T_{\text{\methodname{}}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3{\scriptsize$\pm$12.7}} & \textbf{921.5{\scriptsize$\pm$8.5}} & \textbf{937.3{\scriptsize$\pm$3.9}} \\
+Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\midrule % 중간 타이틀 제거하고 선만 유지
+\methodname{} (Full) & 13m & 9.9{\scriptsize$\pm$2.3} & \textbf{146.3{\scriptsize$\pm$10.4}} & \textbf{533.9{\scriptsize$\pm$13.9}} & \underline{799.4{\scriptsize$\pm$9.2}} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\methodname{} (2-Sub) & 6m & 10.6{\scriptsize$\pm$2.8} & \underline{145.7{\scriptsize$\pm$13.5}} & \underline{530.6{\scriptsize$\pm$20.3}} & \textbf{802.5{\scriptsize$\pm$6.9}} & \underline{882.6{\scriptsize$\pm$7.1}} & \underline{902.4{\scriptsize$\pm$13.4}} & \underline{911.5{\scriptsize$\pm$9.2}} \\
+\methodname{} (4-Sub) & 2.9m & \underline{12.1{\scriptsize$\pm$3.3}} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.9{\scriptsize$\pm$7.9} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+\methodname{} (8-Sub) & 1.5m & \textbf{12.3{\scriptsize$\pm$2.5}} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Uniqueness scores ($\uparrow$) on Zinc-250k~\citep{irwin2012zinc} across varying numbers of subsets. Best values per column are highlighted in bold. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration, measured in wall-clock time using an RTX A6000 GPU.}
+% \label{tab:zinc250k_subset_uniqueness}
+% \setlength{\tabcolsep}{3.2pt}
+% \begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+% \toprule
+% Method & $T_{\methodname{}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & 887.3{\scriptsize$\pm$12.7} & 921.5{\scriptsize$\pm$8.5} & 937.2{\scriptsize$\pm$3.8} \\
+% Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+% \midrule
+% \multicolumn{2}{c}{\textit{\methodname{}}} \\
+% \midrule
+% Full-set & 13m & 9.9{\scriptsize$\pm$2.3} & 146.3{\scriptsize$\pm$10.4} & 533.9{\scriptsize$\pm$13.9} & 799.4{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+% 2-Subset & 6m & 10.6{\scriptsize$\pm$2.8} & 145.7{\scriptsize$\pm$13.5} & 530.6{\scriptsize$\pm$20.3} & 802.5{\scriptsize$\pm$6.9} & 882.6{\scriptsize$\pm$7.1} & 902.4{\scriptsize$\pm$13.4} & 911.5{\scriptsize$\pm$9.2} \\
+% 4-Subset & 2.9m & 12.1{\scriptsize$\pm$3.3} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.9{\scriptsize$\pm$7.9} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+% 8-Subset & 1.5m & 12.3{\scriptsize$\pm$2.5} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Uniqueness scores ($\uparrow$) on Zinc-250k~\citep{irwin2012zinc} evaluated across different subset partitions and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration.}
+\label{tab:zinc250k_subset_uniqueness}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+\toprule
+Method & $T_{\methodname{}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3{\scriptsize$\pm$12.7}} & \textbf{921.5{\scriptsize$\pm$8.5}} & \textbf{937.2{\scriptsize$\pm$3.8}} \\
+Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\midrule
+\methodname{} (Full) & 13m & 9.9{\scriptsize$\pm$2.3} & \textbf{146.3{\scriptsize$\pm$10.4}} & \textbf{533.9{\scriptsize$\pm$13.9}} & \underline{799.4{\scriptsize$\pm$9.2}} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\methodname{} (2-Sub) & 6m & 10.6{\scriptsize$\pm$2.8} & \underline{145.7{\scriptsize$\pm$13.5}} & \underline{530.6{\scriptsize$\pm$20.3}} & \textbf{802.5{\scriptsize$\pm$6.9}} & \underline{882.6{\scriptsize$\pm$7.1}} & \underline{902.4{\scriptsize$\pm$13.4}} & \underline{911.5{\scriptsize$\pm$9.2}} \\
+\methodname{} (4-Sub) & 2.9m & \underline{12.1{\scriptsize$\pm$3.3}} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.9{\scriptsize$\pm$7.9} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+\methodname{} (8-Sub) & 1.5m & \textbf{12.3{\scriptsize$\pm$2.5}} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+% \begin{table}[H]
+% \small
+% \centering
+% \caption{Novelty scores ($\uparrow$) on Zinc-250k~\citep{irwin2012zinc} across varying numbers of subsets. Best values per column are highlighted in bold. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration, measured in wall-clock time using an RTX A6000 GPU.}
+% \label{tab:zinc250k_subset_novelty}
+% \setlength{\tabcolsep}{3.2pt}
+% \begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+% \toprule
+% Method & $T_{\methodname{}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+% \midrule
+% UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & 887.3{\scriptsize$\pm$12.7} & 921.3{\scriptsize$\pm$8.8} & 936.9{\scriptsize$\pm$4.1} \\
+% Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+% \midrule
+% \multicolumn{2}{c}{\textit{\methodname{}}} \\
+% \midrule
+% Full-set & 13m & 9.9{\scriptsize$\pm$2.3} & 146.3{\scriptsize$\pm$10.4} & 533.9{\scriptsize$\pm$13.9} & 799.4{\scriptsize$\pm$9.2} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+% 2-Subset & 6m & 10.6{\scriptsize$\pm$2.8} & 145.7{\scriptsize$\pm$13.5} & 530.6{\scriptsize$\pm$20.3} & 802.5{\scriptsize$\pm$6.9} & 882.6{\scriptsize$\pm$7.1} & 902.4{\scriptsize$\pm$13.4} & 911.5{\scriptsize$\pm$9.2} \\
+% 4-Subset & 2.9m & 12.1{\scriptsize$\pm$3.3} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.8{\scriptsize$\pm$8.0} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+% 8-Subset & 1.5m & 12.3{\scriptsize$\pm$2.5} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+% \bottomrule
+% \end{tabularx}
+% \end{table}
+\begin{table}[H]
+\small
+\centering
+% color to blue
+% \captionsetup{font={color=correctblue}} 
+% \color{correctblue}
+% \arrayrulecolor{correctblue}
+% color to blue
+\caption{Novelty scores ($\uparrow$) on Zinc-250k~\citep{irwin2012zinc} evaluated across different subset partitions and NFEs (1 to 64). The best and second-best values per column are highlighted in \textbf{bold} and \underline{underlined}, respectively. $T_{\methodname{}}$ denotes the runtime (in minutes) of each configuration.}
+\label{tab:zinc250k_subset_novelty}
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabularx}{\textwidth}{l|c|YYYYYYY}
+\toprule
+Method & $T_{\methodname{}}$ & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\midrule
+UDLM & 0 & 0.3{\scriptsize$\pm$0.5} & 65.2{\scriptsize$\pm$8.2} & 435.7{\scriptsize$\pm$14.4} & 775.1{\scriptsize$\pm$19.5} & \textbf{887.3{\scriptsize$\pm$12.7}} & \textbf{921.3{\scriptsize$\pm$8.8}} & \textbf{936.9{\scriptsize$\pm$4.1}} \\
+Random & 0 & 0.6{\scriptsize$\pm$0.9} & 68.3{\scriptsize$\pm$10.7} & 351.2{\scriptsize$\pm$15.8} & 569.4{\scriptsize$\pm$16.6} & 611.0{\scriptsize$\pm$16.3} & 602.4{\scriptsize$\pm$13.3} & 571.0{\scriptsize$\pm$13.2} \\
+\midrule
+\methodname{} (Full) & 13m & 9.9{\scriptsize$\pm$2.3} & \textbf{146.3{\scriptsize$\pm$10.4}} & \textbf{533.9{\scriptsize$\pm$13.9}} & \underline{799.4{\scriptsize$\pm$9.2}} & 873.2{\scriptsize$\pm$14.1} & 901.0{\scriptsize$\pm$14.2} & 907.8{\scriptsize$\pm$7.7} \\
+\methodname{} (2-Sub) & 6m & 10.6{\scriptsize$\pm$2.8} & \underline{145.7{\scriptsize$\pm$13.5}} & \underline{530.6{\scriptsize$\pm$20.3}} & \textbf{802.5{\scriptsize$\pm$6.9}} & \underline{882.6{\scriptsize$\pm$7.1}} & \underline{902.4{\scriptsize$\pm$13.4}} & \underline{911.5{\scriptsize$\pm$9.2}} \\
+\methodname{} (4-Sub) & 2.9m & \underline{12.1{\scriptsize$\pm$3.3}} & 142.5{\scriptsize$\pm$5.2} & 509.7{\scriptsize$\pm$11.0} & 780.9{\scriptsize$\pm$14.4} & 858.8{\scriptsize$\pm$8.0} & 886.7{\scriptsize$\pm$8.7} & 899.0{\scriptsize$\pm$10.5} \\
+\methodname{} (8-Sub) & 1.5m & \textbf{12.3{\scriptsize$\pm$2.5}} & 141.1{\scriptsize$\pm$6.7} & 510.9{\scriptsize$\pm$17.2} & 766.8{\scriptsize$\pm$12.6} & 857.5{\scriptsize$\pm$8.4} & 886.9{\scriptsize$\pm$9.6} & 896.5{\scriptsize$\pm$6.3} \\
+\bottomrule
+\end{tabularx}
+\end{table}
