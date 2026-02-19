@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <script>
         MathJax = {
             tex: {
@@ -23,13 +25,31 @@
     <header>
         <div class="container">
             <h1>PairFlow: Closed-Form Source-Target Coupling for Few-Step Generation in Discrete Flow Models</h1>
+            <h2>ICLR 2026</h2>
             <div class="authors">
-                <p>Mingue Park*, Jisung Hwang*, Seungwoo Yoo*, Kyeongmin Yeo, Minhyuk Sung</p>
+                <p>
+                    <a href="https://uygnim99.github.io/">Mingue Park</a>*,
+                    <!-- <a href="">Jisung Hwang</a>*, -->
+                    Jisung Hwang*,
+                    <a href="https://dvelopery0115.github.io/">Seungwoo Yoo</a>*,
+                    <a href="https://32v.github.io/">Kyeongmin Yeo</a>,
+                    <a href="https://mhsung.github.io/">Minhyuk Sung</a>
+                </p>
                 <p class="affiliation">KAIST</p>
             </div>
             <div class="links">
-                <a href="https://arxiv.org/abs/2512.20063" class="btn" target="_blank">Paper</a>
-                <a href="#" class="btn">Code (Coming Soon)</a>
+                <a href="https://arxiv.org/pdf/2512.20063" class="btn" target="_blank">
+                    <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                    Paper
+                </a>
+                <a href="https://arxiv.org/abs/2512.20063" class="btn" target="_blank">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    arXiv
+                </a>
+                <a href="#" class="btn" style="pointer-events: none; opacity: 0.6;">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    Code (Coming Soon)
+                </a>
             </div>
         </div>
     </header>
@@ -69,18 +89,24 @@
     <div class="container">
         <h1>Abstract</h1>
         <p>
-            We introduce PairFlow, a lightweight preprocessing step for training Discrete Flow Models (DFMs) to
+            We introduce <strong>PairFlow</strong>, a lightweight preprocessing step for training <a
+                href="https://arxiv.org/abs/2407.13782" target="_blank"
+                style="color: #0056b3; text-decoration: underline;">Discrete Flow Models (DFMs)</a> to
             achieve few-step sampling without requiring a pretrained teacher. DFMs have recently emerged as a new
             class of generative models for discrete data, offering strong performance. However, they suffer from
             slow sampling due to their iterative nature. Existing acceleration methods largely depend on finetuning,
-            which introduces substantial additional training overhead. PairFlow addresses this issue with a
-            lightweight preprocessing step. Inspired by ReFlow and its extension to DFMs, we train DFMs from coupled
+            which introduces substantial additional training overhead. <strong>PairFlow</strong> addresses this issue
+            with a
+            lightweight preprocessing step. Inspired by <a href="https://arxiv.org/abs/2209.03003" target="_blank"
+                style="color: #0056b3; text-decoration: underline;">ReFlow</a> and its extension to DFMs, we train
+            DFMs from coupled
             samples of source and target distributions, without requiring any pretrained teacher.
         </p>
         <p>
             At the core of our approach is a closed-form inversion for DFMs, which allows efficient construction of
             paired source–target samples. Despite its extremely low cost, taking only up to 1.7% of the compute
-            needed for full model training, PairFlow matches or even surpasses the performance of two-stage training
+            needed for full model training, <strong>PairFlow</strong> matches or even surpasses the performance of
+            two-stage training
             involving finetuning. Furthermore, models trained with our framework provide stronger base models for
             subsequent distillation, yielding further acceleration after finetuning. Experiments on molecular data
             as well as binary and RGB images demonstrate the broad applicability and effectiveness of our approach.
@@ -92,7 +118,8 @@
         <div class="container">
             <h1>Method</h1>
             <p>
-                PairFlow is a training framework for DFMs that enables few-step sampling by constructing paired
+                <strong>PairFlow</strong> is a training framework for DFMs that enables few-step sampling by
+                constructing paired
                 source–target samples using closed-form velocities. While inspired by ReDi-style coupling-driven
                 training, our approach eliminates the need for a pretrained teacher by using closed-form formulations
                 and achieves acceleration without finetuning. The algorithm for computing source–target pairs is fully
@@ -111,6 +138,8 @@
                         <img src="assets/images/pairflow_algorithm1.png"
                             alt="Algorithm 1: PairFlow Source-Target Coupling"
                             style="max-width: 90%; height: auto; border: 1px solid #e1e4e8; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <p class="caption">Algorithm 1: Procedure for generating source-target pairs using the
+                            closed-form backward velocity.</p>
                     </div>
                 </div>
             </div>
@@ -125,8 +154,8 @@
                 $$
                 \begin{align}
                 p_{1|t}(x^i|z) = \cfrac{\sum_{m=1}^M \delta_{d_{m}^i}(x^i) \gamma^{- h(d_{m}, z)}}{ \sum_{m=1}^M
-                \gamma^{- h(d_{m}, z)}} \quad \Longrightarrow \quad
-                \hat{v}_t(x^i, z) = \frac{\dot\kappa_t}{1 - \kappa_t} \left[p_{1|t}(x^i|z) - \delta_{z}(x^i) \right]
+                \gamma^{- h(d_{m}, z)}}, \quad \Longrightarrow \quad
+                \hat{v}_t(x^i, z) = \frac{\dot\kappa_t}{1 - \kappa_t} \left[p_{1|t}(x^i|z) - \delta_{z}(x^i) \right].
                 \tag{9}
                 \end{align}
                 $$
@@ -139,7 +168,7 @@
                 $$
                 \begin{align}
                 p_{0|t}(x^i|z) = \delta_{z}(x^i) - \frac{\kappa_t(K \delta_{x^i}(z^i) - 1)}{1 + (K-1)\kappa_t}
-                \frac{\sum_{m=1}^M \delta_{d_m^i}(z^i)\gamma^{-h(d_m, z)}}{\sum_{m=1}^M \gamma^{-h(d_m, z)}} \tag{11}
+                \frac{\sum_{m=1}^M \delta_{d_m^i}(z^i)\gamma^{-h(d_m, z)}}{\sum_{m=1}^M \gamma^{-h(d_m, z)}}. \tag{11}
                 \end{align}
                 $$
             </p>
@@ -151,9 +180,18 @@
                 $$
                 \begin{align}
                 \check{v}_t(x^i, z) = \frac{\dot{\kappa}_t(K \delta_{x^i}(z^i)-1)}{1 + (K-1)\kappa_t} \frac{\sum_{m=1}^M
-                \delta_{d_m^i}(z^i)\gamma^{-h(d_m, z)}}{\sum_{m=1}^M \gamma^{-h(d_m, z)}} \tag{12}
+                \delta_{d_m^i}(z^i)\gamma^{-h(d_m, z)}}{\sum_{m=1}^M \gamma^{-h(d_m, z)}}. \tag{12}
                 \end{align}
                 $$
+            </p>
+            <h2>PairFlow Algorithm</h2>
+            <p>
+                Using the derived closed-form backward velocity, we can efficiently compute source-target pairs. As
+                outlined in <strong>Algorithm 1</strong>, starting from a given target data sample $x_1$, we iteratively
+                apply the backward update rule using $\check{v}_t(x^i, z)$ to trace back the probability path. The final
+                state $x_0$ reached by this iterative process serves as the source noise. This directly constructs a
+                well-aligned source-target pair $(x_0, x_1)$ purely from data, effectively eliminating the need for
+                generating samples from a pretrained teacher model.
             </p>
         </div>
     </section>
@@ -197,7 +235,8 @@
                     <img src="assets/images/02_zinc_novel_base.png" alt="ZINC-250k Novelty">
                 </div>
             </div>
-            <p class="caption">Figure 3: Step-wise performance analysis on the ZINC-250k dataset.</p>
+            <p class="caption">Figure 3: Step-wise performance analysis on the ZINC-250k
+                dataset.</p>
 
             <!-- <h3>Image Generation</h3> -->
             <div class="results-grid triple-grid">
@@ -214,7 +253,8 @@
                     <img src="assets/images/04_cifar_is_base.png" alt="CIFAR-10 IS">
                 </div>
             </div>
-            <p class="caption">Figure 4: Step-wise performance analysis on discretized image datasets.</p>
+            <p class="caption">Figure 4: Step-wise performance analysis on discretized image
+                datasets.</p>
 
             <h1>Qualitative Results</h1>
             <div class="visual-results-container">
@@ -371,11 +411,11 @@
     <section id="citation">
         <div class="container">
             <h2>Citation</h2>
-            <pre><code>@article{park2025pairflow,
+            <pre><code>@inproceedings{park2026:pairflow,
   title={PairFlow: Closed-Form Source-Target Coupling for Few-Step Generation in Discrete Flow Models},
   author={Park, Mingue and Hwang, Jisung and Yoo, Seungwoo and Yeo, Kyeongmin and Sung, Minhyuk},
-  journal={arXiv preprint arXiv:2512.20063},
-  year={2025}
+  booktitle={ICLR},
+  year={2026}
 }
 </code></pre>
         </div>
