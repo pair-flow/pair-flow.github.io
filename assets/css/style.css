@@ -612,9 +612,18 @@ footer {
 
 /* Responsive updates for Round 3 */
 @media (max-width: 900px) {
+    .mnist-section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .mnist-grid {
-        grid-template-columns: repeat(4, 1fr);
-        /* Fallback */
+        min-width: 720px;
+    }
+
+    .mnist-section-title {
+        position: sticky;
+        left: 0;
     }
 
     .cifar-wrapper {
